@@ -15,6 +15,10 @@ set(SOURCE_FILES
         ContactListener.h
         MachineSystemStandin.cpp
         MachineSystemStandin.h
+        MachineSystemActual.cpp
+        MachineSystemActual.h
+        Machine.cpp
+        Machine.h
 )
 
 # Removed:
