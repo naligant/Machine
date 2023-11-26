@@ -19,6 +19,8 @@ set(SOURCE_FILES
         MachineSystemActual.h
         Machine.cpp
         Machine.h
+        Component.cpp
+        Component.h
 )
 
 # Removed:
