@@ -9,6 +9,8 @@
 #include "pch.h"
 #include "MachineSystemFactory.h"
 #include "MachineSystemStandin.h"
+#include "MachineSystemActual.h"
+#include "MachineCFactory.h"
 
 /**
  * Constructor
@@ -29,7 +31,16 @@ MachineSystemFactory::MachineSystemFactory(std::wstring resourcesDir) :
  */
 std::shared_ptr<IMachineSystem> MachineSystemFactory::CreateMachineSystem()
 {
-    return std::make_shared<MachineSystemStandin>();
+    auto machineSystem =  std::make_shared<MachineSystemActual>();
+    // Create and add Machine
+    MachineCFactory machineCFactory(mResourcesDir);
+    auto machine = machineCFactory.Create();
+
+    wxPoint point = wxPoint(0,0);
+    machineSystem->SetLocation(point);
+
+    machineSystem->SetMachine(machine);
+    return machineSystem;
 }
 
 

@@ -7,6 +7,11 @@
  *
  * Note: Dimensions for the PhysicsPolygon object are in
  * centimeters.
+ *
+ * Version history:
+ * 1.00 Initial version for FS23 project 2
+ * 1.01 Revised to work prior to physics installation
+ * 1.02 Disabled the ability to use DrawPolygon directly
  */
 
 #pragma once
@@ -34,6 +39,8 @@ namespace cse335
 class PhysicsPolygon : public Polygon
 {
 private:
+    using Polygon::DrawPolygon;
+
     /// The physics system body for this component
     /// Null until installed in the physics system
     b2Body *mBody = nullptr;
@@ -78,7 +85,7 @@ public:
      * Set the component initial rotation
      * @param r Rotation in turns (0-1 for one rotation)
      */
-    void SetInitialRotation(double r) {mInitialRotation = r * M_PI * 2;}
+    void SetInitialRotation(double r) { mInitialRotation = r * M_PI * 2; }
 
     void SetRotation(double rotation);
 

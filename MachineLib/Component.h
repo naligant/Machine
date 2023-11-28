@@ -12,7 +12,7 @@ class Component
 {
 private:
     bool mPhysics;
-    wxPoint mPosition;
+    Machine* mMachine = nullptr;
 public:
     /**
      * Determines if an object requires physics or not
@@ -40,20 +40,22 @@ public:
      * resets entire machine
      */
     virtual void Reset();
-    /**
-     * Sets position of component
-     * @param point
-     */
-    virtual void SetPosition(wxPoint point) {mPosition = point;}
+//    /**
+//     * Sets position of component
+//     * @param point
+//     */
+//    virtual void SetPosition(wxPoint point) {mMachine = point;}
     /**
      * Sets the image of component
      */
-    virtual void SetImage();
+    virtual void SetImage(const std::wstring &filename);
     /**
      * Sets the speed of the component
      * @param speed
      */
     virtual void SetSpeed(double speed);
+
+    void SetMachine(Machine *machine);
 };
 
 #endif //CANADIANEXPERIENCE_MACHINELIB_COMPONENT_H

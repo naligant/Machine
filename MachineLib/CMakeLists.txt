@@ -6,11 +6,10 @@ set(SOURCE_FILES
         MachineSystemFactory.cpp MachineSystemFactory.h
         MachineStandin.cpp MachineStandin.h
         Polygon.cpp Polygon.h
+        PhysicsPolygon.cpp PhysicsPolygon.h
         DebugDraw.cpp DebugDraw.h
         Consts.h
         MachineDialog.cpp MachineDialog.h include/machine-api.h
-        PhysicsPolygon.cpp
-        PhysicsPolygon.h
         ContactListener.cpp
         ContactListener.h
         MachineSystemStandin.cpp
@@ -21,6 +20,10 @@ set(SOURCE_FILES
         Machine.h
         Component.cpp
         Component.h
+        MachineCFactory.h
+        MachineCFactory.cpp
+        Body.cpp
+        Body.h
 )
 
 # Removed:

@@ -8,64 +8,84 @@
 #ifndef CANADIANEXPERIENCE_MACHINELIB_MACHINESYSTEMACTUAL_H
 #define CANADIANEXPERIENCE_MACHINELIB_MACHINESYSTEMACTUAL_H
 #include "IMachineSystem.h"
+#include "Machine.h"
+
 class MachineSystemActual : public IMachineSystem
 {
 private:
-    wxPoint mLocation;
-    double mFrameRate;
-    double mTime;
-    int mFlag;
-    int mFrame;
-    int mMachine;
+    std::shared_ptr<Machine> mMachine;
+
 
 public:
+    /// Constructor
+    MachineSystemActual();
+
+    /// Copy constructor (disabled)
+    MachineSystemActual(const MachineSystemActual &) = delete;
+
+    /// Assignment operator
+    void operator=(const MachineSystemActual &) = delete;
+
     /**
      * sets location of machine
      * @param point
      */
-    void SetLocation(wxPoint point) override {mLocation = point;}
+    virtual void SetLocation(wxPoint point);
 
     /**
      * Gets location of machine
      * @return location
      */
-    wxPoint GetLocation() override {return mLocation;}
+    virtual wxPoint GetLocation();
 
     /**
      * Draws the actual machine
      * @param graphics
      */
-    void DrawMachine (std::shared_ptr<wxGraphicsContext> graphics) override;
+    virtual void DrawMachine (std::shared_ptr<wxGraphicsContext> graphics);
 
     /**
      * Sets the frame rate
      * @param rate
      */
-    void SetFrameRate(double rate) override {mFrameRate = rate;}
+    virtual void SetFrameRate(double rate);
 
     /**
      * Gets the time of the machine
      * @return
      */
-    double GetMachineTime() override {return mTime;}
+    virtual double GetMachineTime();
 
     /**
      * Sets the flag for machine
      * @param flag
      */
-    void SetFlag(int flag) override {mFlag = flag;}
+    virtual void SetFlag(int flag) {}
 
     /**
      * Sets the machine frame
      * @param frame
      */
-    void SetMachineFrame(int frame) override {mFrame = frame;}
+    virtual void SetMachineFrame(int frame);
 
     /**
      * Sets the machine number
      * @param machine
      */
-    void SetMachineNumber(int machine) override {mMachine = machine;}
+    virtual void SetMachineNumber(int machine);
+
+    /**
+     * Sets the machine number
+     * @param machine
+     */
+     virtual int GetMachineNumber();
+
+//    /**
+//    * Get a pointer to the Timeline object
+//    * @return Pointer to the Timeline object
+//    */
+//    Machine *GetMachine() {return &mMachine;}
+    void SetMachine(std::shared_ptr<Machine> machine) {mMachine = machine;}
 
 
 
