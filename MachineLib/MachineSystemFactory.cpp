@@ -31,16 +31,7 @@ MachineSystemFactory::MachineSystemFactory(std::wstring resourcesDir) :
  */
 std::shared_ptr<IMachineSystem> MachineSystemFactory::CreateMachineSystem()
 {
-    auto machineSystem =  std::make_shared<MachineSystemActual>();
-    // Create and add Machine
-    MachineCFactory machineCFactory(mResourcesDir);
-    auto machine = machineCFactory.Create();
-
-    wxPoint point = wxPoint(0,0);
-    machineSystem->SetLocation(point);
-
-    machineSystem->SetMachine(machine);
-    return machineSystem;
+    return std::make_shared<MachineSystemActual>(mResourcesDir);
 }
 
 

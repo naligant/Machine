@@ -3,7 +3,9 @@
  * @author Prajeeth Naliganti
  */
 
+#include "pch.h"
 #include "Component.h"
+#include "Machine.h"
 
 void Component::SetMachine(Machine *machine)
 {
@@ -23,7 +25,7 @@ void Component::Draw(std::shared_ptr<wxGraphicsContext> graphics, int x, int y)
      */
 void Component::Update(double elapsed)
 {
-
+    mMachine->Update(elapsed);
 }
 
 /**
@@ -48,6 +50,10 @@ void Component::SetSpeed(double speed)
      * resets entire machine
      */
 void Component::Reset()
+{
+}
+
+void Component::InstallPhysics(std::shared_ptr<b2World> world)
 {
 
 }

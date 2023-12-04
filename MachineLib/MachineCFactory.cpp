@@ -7,7 +7,7 @@
 #include "MachineCFactory.h"
 #include "Machine.h"
 #include "Body.h"
-//#include "Goal.h"
+#include "Goal.h"
 
 /// The images directory in resources
 const std::wstring ImagesDirectory = L"/images";
@@ -59,9 +59,8 @@ std::shared_ptr<Machine> MachineCFactory::Create()
     basketball1->SetPhysics(1, 0.5, 0.6);
     machine->AddComponent(basketball1);
 
-//    auto goal = std::make_shared<Goal>(mImagesDir);
-//    goal->SetPosition(270, 0);
-//    machine->AddComponent(goal);
-//
+    auto goal = std::make_shared<Goal>(mImagesDir);
+    goal->SetPosition(270, 0);
+    machine->AddComponent(goal);
     return machine;
 }

@@ -12,6 +12,7 @@
 #define CANADIANEXPERIENCE_MACHINESYSTEMFACTORY_H
 
 #include <memory>
+#include "Machine.h"
 
 class IMachineSystem;
 

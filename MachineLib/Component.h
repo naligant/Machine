@@ -7,10 +7,13 @@
 
 #ifndef CANADIANEXPERIENCE_MACHINELIB_COMPONENT_H
 #define CANADIANEXPERIENCE_MACHINELIB_COMPONENT_H
-class Machine;
+#include <b2_world.h>
+#include "PhysicsPolygon.h"
+#include "Machine.h"
 class Component
 {
 private:
+    cse335::PhysicsPolygon* mPolygon;
     bool mPhysics;
     Machine* mMachine = nullptr;
 public:
@@ -56,6 +59,9 @@ public:
     virtual void SetSpeed(double speed);
 
     void SetMachine(Machine *machine);
+
+    virtual void InstallPhysics(std::shared_ptr<b2World> world);
+
 };
 
 #endif //CANADIANEXPERIENCE_MACHINELIB_COMPONENT_H

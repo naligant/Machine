@@ -24,6 +24,10 @@ set(SOURCE_FILES
         MachineCFactory.cpp
         Body.cpp
         Body.h
+        Goal.cpp
+        Goal.h
+        Hamster.cpp
+        Hamster.h
 )
 
 # Removed:

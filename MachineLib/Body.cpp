@@ -3,6 +3,7 @@
  * @author Prajeeth Naliganti
  */
 
+#include "pch.h"
 #include "Body.h"
 Body::Body()
 {
@@ -21,7 +22,7 @@ void Body::AddPoint(int x, int y)
 
 void Body::Update(double elapsed)
 {
-
+    //Update(elapsed);
 }
 void Body::Draw(std::shared_ptr<wxGraphicsContext>graphics, int x, int y)
 {
@@ -29,6 +30,8 @@ void Body::Draw(std::shared_ptr<wxGraphicsContext>graphics, int x, int y)
 }
 void Body::Reset()
 {
+    //mPolygon.InstallPhysics(GetWorld());
+    //Component::Reset();
 
 }
 void Body::SetDynamic()
@@ -40,7 +43,7 @@ void Body::SetKinematic()
 {
     mPolygon.SetKinematic();
 }
-void Body::SetInitialPosition(int x, int y)
+void Body::SetInitialPosition(double x, double y)
 {
     mPolygon.SetInitialPosition(x, y);
 }
@@ -55,7 +58,18 @@ void Body::Circle(int radius)
     mPolygon.Circle(radius);
 }
 
-void Body::SetPhysics(int density, int friction, int restitution)
+void Body::SetPhysics(double density, double friction, double restitution)
 {
     mPolygon.SetPhysics(density, friction, restitution);
+}
+
+//std::vector<cse335::PhysicsPolygon*> Body::GetPolygon()
+//{
+//    std::vector<cse335::PhysicsPolygon*> vector;
+//    vector.push_back(&mPolygon);
+//    return vector;
+//}
+void Body::InstallPhysics(std::shared_ptr<b2World> world)
+{
+    mPolygon.InstallPhysics(world);
 }

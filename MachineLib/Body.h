@@ -26,11 +26,12 @@ public:
     void SetDynamic();
     void SetKinematic();
     void SetImage(const std::wstring &filename) override;
-    void SetInitialPosition(int x, int y);
+    void SetInitialPosition(double x, double y);
     void Circle(int radius);
-    void SetPhysics(int density, int friction, int restitution);
+    void SetPhysics(double density, double friction, double restitution);
+    void InstallPhysics(std::shared_ptr<b2World> world) override;
 //    cse335::PhysicsPolygon* GetPhysicsPolygon() {return &mPhysicsPolygon;}
-//    cse335::Polygon* GetPolygon() {return &mPolygon;}
+//    std::vector<cse335::PhysicsPolygon*> GetPolygon() override;
 
 
 };

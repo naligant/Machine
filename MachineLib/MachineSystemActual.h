@@ -14,11 +14,14 @@ class MachineSystemActual : public IMachineSystem
 {
 private:
     std::shared_ptr<Machine> mMachine;
+    std::wstring mResourcesDir;
+    int mFrame = 0;
+    int mFrameRate = 30;
 
 
 public:
     /// Constructor
-    MachineSystemActual();
+    MachineSystemActual(std::wstring resourcesDir);
 
     /// Copy constructor (disabled)
     MachineSystemActual(const MachineSystemActual &) = delete;
@@ -48,7 +51,7 @@ public:
      * Sets the frame rate
      * @param rate
      */
-    virtual void SetFrameRate(double rate);
+    virtual void SetFrameRate(double rate) {mFrameRate = rate;};
 
     /**
      * Gets the time of the machine
@@ -80,11 +83,6 @@ public:
      */
      virtual int GetMachineNumber();
 
-//    /**
-//    * Get a pointer to the Timeline object
-//    * @return Pointer to the Timeline object
-//    */
-//    Machine *GetMachine() {return &mMachine;}
     void SetMachine(std::shared_ptr<Machine> machine) {mMachine = machine;}
 
 

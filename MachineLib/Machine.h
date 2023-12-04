@@ -7,12 +7,18 @@
 
 #ifndef CANADIANEXPERIENCE_MACHINELIB_MACHINE_H
 #define CANADIANEXPERIENCE_MACHINELIB_MACHINE_H
+#include <b2_world.h>
+#include "ContactListener.h"
 class Component;
 
 class Machine
 {
 private:
-    int mMachine = 1;
+    /// The box2d world
+    std::shared_ptr<b2World> mWorld;
+    /// The installed contact filter
+    std::shared_ptr<ContactListener> mContactListener;
+    int mMachine;
     int mX = 0;         ///< Machine x location
     int mY = 0;         ///< Machine y location
     int mFrame = 0;     ///< Current frame
@@ -21,7 +27,7 @@ private:
     std::vector<std::shared_ptr<Component>> mComponents;
 
 public:
-    Machine() {}
+    Machine();
     Machine(int machine);
     /**
      * Adds component to machine
@@ -57,19 +63,17 @@ public:
     * Set the current machine animation frame
     * @param frame Frame number
     */
-    void SetMachineFrame(int frame) { mFrame = frame; }
+    void SetMachineFrame(int frame);
 
-    /**
-    * Set the machine number
-    * @param machine An integer number. Each integer makes a different machine
-    */
-    void SetMachine(int machine) { mMachine = machine; }
 
     /**
     * Get the current machine number
     * @return Machine number
     */
     int GetMachine() { return mMachine; }
+
+    std::shared_ptr<b2World> GetWorld() {return mWorld;}
+
 
     /** Iterator that iterates over the actors in a picture */
     class ComponentIter

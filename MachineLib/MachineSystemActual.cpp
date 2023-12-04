@@ -6,11 +6,13 @@
 #include "pch.h"
 #include "MachineSystemActual.h"
 #include "Machine.h"
+#include "MachineCFactory.h"
+#include "MachineSystemFactory.h"
 
-MachineSystemActual::MachineSystemActual()
+MachineSystemActual::MachineSystemActual(std::wstring resourcesDir) : mResourcesDir(resourcesDir)
 {
-    mMachine = std::make_shared<Machine>(1);
     SetMachineNumber(1);
+//    mResourcesDir = resourcesDir;
 }
 
 /**
@@ -64,16 +66,17 @@ void MachineSystemActual::DrawMachine(std::shared_ptr<wxGraphicsContext> graphic
 */
 void MachineSystemActual::SetMachineFrame(int frame)
 {
+    if(frame < mFrame)
+    {
+        mFrame = 0;
+        mMachine->Reset();
+    }
+
+    for( ; mFrame < frame;  mFrame++)
+    {
+        mMachine->Update(1.0 / mFrameRate);
+    }
     mMachine->SetMachineFrame(frame);
-}
-
-/**
- * Set the expected frame rate in frames per second
- * @param rate Frame rate in frames per second
- */
-void MachineSystemActual::SetFrameRate(double rate)
-{
-
 }
 
 /**
@@ -82,7 +85,18 @@ void MachineSystemActual::SetFrameRate(double rate)
 */
 void MachineSystemActual::SetMachineNumber(int machine)
 {
-    mMachine->SetMachine(machine);
+   if (machine == 1)
+   {
+       MachineCFactory machineCFactory(mResourcesDir);
+       mMachine = machineCFactory.Create();
+       mMachine->Reset();
+   }
+   else if (machine == 2)
+   {
+       mMachine = std::make_shared<Machine>(machine);
+       mMachine->Reset();
+   }
+
 }
 
 /**
