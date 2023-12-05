@@ -18,6 +18,12 @@ private:
     double mSpeed;
 public:
     Body();
+    /// Copy constructor (disabled)
+    Body(const Body &) = delete;
+
+    /// Assignment operator
+    void operator=(const Body &) = delete;
+
     void Rectangle(int x, int y, int width, int height);
     void AddPoint(int x, int y);
     void Update(double elapsed) override;

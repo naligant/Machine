@@ -28,6 +28,8 @@ set(SOURCE_FILES
         Goal.h
         Hamster.cpp
         Hamster.h
+        Machine1Factory.cpp
+        Machine1Factory.h
 )
 
 # Removed:

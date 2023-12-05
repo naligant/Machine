@@ -23,6 +23,12 @@ private:
 
 public:
     Goal(const std::wstring imagesDir);
+    /// Copy constructor (disabled)
+    Goal(const Goal &) = delete;
+
+    /// Assignment operator
+    void operator=(const Goal &) = delete;
+
     void BeginContact(b2Contact* contact) override;
     void PreSolve(b2Contact *contact, const b2Manifold *oldManifold) override;
     void Draw(std::shared_ptr<wxGraphicsContext> graphics, int x, int y) override;

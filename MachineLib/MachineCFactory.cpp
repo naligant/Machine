@@ -7,6 +7,7 @@
 #include "MachineCFactory.h"
 #include "Machine.h"
 #include "Body.h"
+#include "Hamster.h"
 #include "Goal.h"
 
 /// The images directory in resources
@@ -62,5 +63,15 @@ std::shared_ptr<Machine> MachineCFactory::Create()
     auto goal = std::make_shared<Goal>(mImagesDir);
     goal->SetPosition(270, 0);
     machine->AddComponent(goal);
+
+    //
+    // The hamster for the second-beam
+    //
+    auto hamster = std::make_shared<Hamster>(mImagesDir);
+    hamster->SetPosition(-220, 185);
+    hamster->SetInitiallyRunning(true);      // Initially running
+    hamster->SetSpeed(0.60);
+    machine->AddComponent(hamster);
+
     return machine;
 }
