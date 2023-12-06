@@ -10,12 +10,19 @@
 #include "Component.h"
 #include "PhysicsPolygon.h"
 #include "Polygon.h"
-
-class Body : public Component
+#include "RotationSource.h"
+#include "IRotationSource.h"
+#include "IRotationSink.h"
+#include "RotationSink.h"
+class Body : public Component, public IRotationSink
 {
 private:
     cse335::PhysicsPolygon mPolygon;
-    double mSpeed;
+    double mSpeed = 0.0;
+    /// Rotation sink for this component
+    RotationSink mSink;
+
+    IRotationSource* mSource = nullptr;
 public:
     Body();
     /// Copy constructor (disabled)
@@ -36,8 +43,10 @@ public:
     void Circle(int radius);
     void SetPhysics(double density, double friction, double restitution);
     void InstallPhysics(std::shared_ptr<b2World> world) override;
-//    cse335::PhysicsPolygon* GetPhysicsPolygon() {return &mPhysicsPolygon;}
-//    std::vector<cse335::PhysicsPolygon*> GetPolygon() override;
+    void SetSource(IRotationSource* source) override {mSource = source;}
+    void Rotate(double rotation, double speed) override;
+
+    RotationSink *GetSink() {return &mSink;}
 
 
 };

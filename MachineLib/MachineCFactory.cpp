@@ -73,5 +73,16 @@ std::shared_ptr<Machine> MachineCFactory::Create()
     hamster->SetSpeed(0.60);
     machine->AddComponent(hamster);
 
+    auto arm = std::make_shared<Body>();
+    arm->SetInitialPosition(-195, 220);
+    arm->AddPoint(-7, 10);
+    arm->AddPoint(7, 10);
+    arm->AddPoint(7, -60);
+    arm->AddPoint(-7, -60);
+    arm->SetImage(mImagesDir + L"/arm.png");
+    arm->SetKinematic();
+    hamster->GetSource()->AddSink(arm);
+    machine->AddComponent(arm);
+
     return machine;
 }

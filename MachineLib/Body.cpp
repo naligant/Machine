@@ -5,9 +5,8 @@
 
 #include "pch.h"
 #include "Body.h"
-Body::Body()
+Body::Body() : mSink(this)
 {
-
 }
 
 void Body::Rectangle(int x, int y, int width, int height)
@@ -72,4 +71,9 @@ void Body::SetPhysics(double density, double friction, double restitution)
 void Body::InstallPhysics(std::shared_ptr<b2World> world)
 {
     mPolygon.InstallPhysics(world);
+}
+
+void Body::Rotate(double rotation, double speed)
+{
+    mPolygon.SetAngularVelocity(-speed);
 }

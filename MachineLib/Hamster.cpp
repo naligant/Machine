@@ -40,12 +40,12 @@ const std::wstring HamsterImages[4] =
     {L"/hamster-sleep.png", L"/hamster-run-1.png",
         L"/hamster-run-2.png", L"/hamster-run-3.png"};
 
-Hamster::Hamster(const std::wstring imagesDir)
+Hamster::Hamster(const std::wstring imagesDir) : mSource(this)
 {
+    //mSource.Rotate(mRotation, mSpeed);
     mCage.BottomCenteredRectangle(HamsterCageSize);
     mCage.SetImage(imagesDir + HamsterCageImage);
     //mCage.SetColor(*wxBLUE);
-
     mWheel.CenteredSquare(HamsterWheelSize);
     mWheel.SetImage(imagesDir + HamsterWheelImage);
 
@@ -82,8 +82,9 @@ void Hamster::Draw(std::shared_ptr<wxGraphicsContext> graphics, int x, int y)
 }
 void Hamster::Update(double elapsed)
 {
-
     mRotation += -mSpeed * elapsed;
+    mSource.Rotate(mRotation, mSpeed);
+
 }
 void Hamster::Reset()
 {
@@ -103,4 +104,10 @@ void Hamster::SetPosition(double x, double y)
 void Hamster::InstallPhysics(std::shared_ptr<b2World> world)
 {
     mCage.InstallPhysics(world);
+}
+
+void Hamster::Rotate(double rotate, double speed)
+{
+    mCage.SetAngularVelocity(speed);
+//    mHamsters.SetAngularVelocity(speed);
 }

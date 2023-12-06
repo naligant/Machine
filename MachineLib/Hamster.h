@@ -10,8 +10,11 @@
 #include "Component.h"
 #include "PhysicsPolygon.h"
 #include "Polygon.h"
+#include "RotationSource.h"
 #include <b2_world_callbacks.h>
-class Hamster : public Component, public b2ContactListener
+#include "IRotationSource.h"
+
+class Hamster : public Component, public b2ContactListener, public IRotationSource
 {
 private:
     ///boolean to mark if hamster is running
@@ -30,6 +33,8 @@ private:
     bool mIsInitialRunning = false;
     /// The position of the hamster cage
     wxPoint2DDouble mPosition;
+    /// Rotation source for this component
+    RotationSource mSource;
 
 public:
     /**
@@ -52,6 +57,13 @@ public:
     void SetPosition(double x, double y);
     void SetSpeed(double speed) override {mSpeed = speed;};
     void InstallPhysics(std::shared_ptr<b2World> world) override;
+    void Rotate(double rotation, double speed) override;
+    /**
+    * Get a pointer to the source object
+    * @return Pointer to RotationSource object
+    */
+    RotationSource *GetSource() { return &mSource; }
+
 
 
 };

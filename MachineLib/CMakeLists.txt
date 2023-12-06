@@ -30,6 +30,12 @@ set(SOURCE_FILES
         Hamster.h
         Machine1Factory.cpp
         Machine1Factory.h
+        RotationSource.cpp
+        RotationSource.h
+        IRotationSink.h
+        RotationSink.cpp
+        RotationSink.h
+        IRotationSource.h
 )
 
 # Removed:
