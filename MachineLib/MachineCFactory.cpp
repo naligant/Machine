@@ -9,6 +9,7 @@
 #include "Body.h"
 #include "Hamster.h"
 #include "Goal.h"
+#include "Pulley.h"
 
 /// The images directory in resources
 const std::wstring ImagesDirectory = L"/images";
@@ -74,7 +75,7 @@ std::shared_ptr<Machine> MachineCFactory::Create()
     machine->AddComponent(hamster);
 
     auto arm = std::make_shared<Body>();
-    arm->SetInitialPosition(-195, 220);
+    arm->SetInitialPosition(hamster->GetShaftPosition().x,hamster->GetShaftPosition().y );
     arm->AddPoint(-7, 10);
     arm->AddPoint(7, 10);
     arm->AddPoint(7, -60);
@@ -83,6 +84,27 @@ std::shared_ptr<Machine> MachineCFactory::Create()
     arm->SetKinematic();
     hamster->GetSource()->AddSink(arm);
     machine->AddComponent(arm);
+
+    auto hamster1 = std::make_shared<Hamster>(mImagesDir);
+    hamster1->SetSpeed(1.0);
+    hamster1->SetInitiallyRunning(true);
+    machine->AddComponent(hamster1);
+    hamster1->SetPosition(0, 150);
+
+    // The pulley driven by the hamster
+    auto pulley1 = std::make_shared<Pulley>(10);
+    pulley1->SetImage(mImagesDir + L"/pulley3.png");
+    pulley1->SetPosition(hamster1->GetShaftPosition().x, hamster1->GetShaftPosition().y);
+    machine->AddComponent(pulley1);
+
+    hamster1->GetSource()->AddSink(pulley1);
+
+    auto pulley2 = std::make_shared<Pulley>(10);
+    pulley2->SetImage(mImagesDir + L"/pulley3.png");
+    pulley2->SetPosition(150, 250);
+    machine->AddComponent(pulley2);
+
+    pulley1->Drive(pulley2);
 
     return machine;
 }

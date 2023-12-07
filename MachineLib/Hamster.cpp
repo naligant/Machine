@@ -42,12 +42,14 @@ const std::wstring HamsterImages[4] =
 
 Hamster::Hamster(const std::wstring imagesDir) : mSource(this)
 {
-    //mSource.Rotate(mRotation, mSpeed);
+
     mCage.BottomCenteredRectangle(HamsterCageSize);
     mCage.SetImage(imagesDir + HamsterCageImage);
-    //mCage.SetColor(*wxBLUE);
+
     mWheel.CenteredSquare(HamsterWheelSize);
     mWheel.SetImage(imagesDir + HamsterWheelImage);
+
+    //mSpeed = HamsterSpeed;
 
     int len = sizeof(HamsterImages) / sizeof(HamsterImages[0]);
     for(int i=0; i < len; i++)
@@ -55,6 +57,8 @@ Hamster::Hamster(const std::wstring imagesDir) : mSource(this)
         mHamsters[i].CenteredSquare(HamsterSize);
         mHamsters[i].SetImage(imagesDir + HamsterImages[i]);
     }
+
+    mCurrentHamster = &mHamsters[0];
 }
 void Hamster::BeginContact(b2Contact* contact)
 {
@@ -74,7 +78,7 @@ void Hamster::Draw(std::shared_ptr<wxGraphicsContext> graphics, int x, int y)
     // Draw the running image
     mWheel.DrawPolygon(graphics, x, y, mRotation);
 
-    mHamsters[0].DrawPolygon(graphics, x, y, 0);
+    mCurrentHamster->DrawPolygon(graphics, x, y, 0);
 
     graphics->PopState();
 
@@ -82,8 +86,22 @@ void Hamster::Draw(std::shared_ptr<wxGraphicsContext> graphics, int x, int y)
 }
 void Hamster::Update(double elapsed)
 {
-    mRotation += -mSpeed * elapsed;
-    mSource.Rotate(mRotation, mSpeed);
+    if (mIsRunning || mIsInitialRunning)
+    {
+        mRotation += -mSpeed * elapsed;
+        mSource.Rotate(mRotation, mSpeed);
+        int index = int(abs(mRotation) * HamsterSpeed * HamsterSpeed) % 4;
+        int order[] = {1, 2, 3, 2};
+        mCurrentHamster = &mHamsters[order[index]];
+//        if (mRotation)
+//        {
+//            mCurrentHamster = &mHamsters[1];
+//        }
+//        else
+//        {
+//            mCurrentHamster = &mHamsters[0];
+//        }
+    }
 
 }
 void Hamster::Reset()
@@ -110,4 +128,10 @@ void Hamster::Rotate(double rotate, double speed)
 {
     mCage.SetAngularVelocity(speed);
 //    mHamsters.SetAngularVelocity(speed);
+}
+
+wxPoint Hamster::GetShaftPosition()
+{
+    auto point = wxPoint(mPosition.m_x + HamsterShaftOffset.m_x, mPosition.m_y + HamsterShaftOffset.m_y);
+    return point;
 }

@@ -38,7 +38,7 @@ public:
     void Reset() override;
     void SetDynamic();
     void SetKinematic();
-    void SetImage(const std::wstring &filename) override;
+    void SetImage(const std::wstring &filename);
     void SetInitialPosition(double x, double y);
     void Circle(int radius);
     void SetPhysics(double density, double friction, double restitution);

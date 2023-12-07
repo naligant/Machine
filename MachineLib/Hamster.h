@@ -29,6 +29,8 @@ private:
     cse335::Polygon mWheel;
     ///states of hamster
     std::array<cse335::Polygon, 4> mHamsters;
+    ///current Hamster image
+    cse335::Polygon* mCurrentHamster;
     ///boolean for if the hamster is initially supposed to run
     bool mIsInitialRunning = false;
     /// The position of the hamster cage
@@ -46,8 +48,8 @@ public:
     /// Copy constructor (disabled)
     Hamster(const Hamster &) = delete;
 
-    /// Assignment operator
-    void operator=(const Hamster &) = delete;
+//    /// Assignment operator
+//    void operator=(const Hamster &) = delete;
 
     void BeginContact(b2Contact* contact) override;
     void Draw(std::shared_ptr<wxGraphicsContext> graphics, int x, int y) override;
@@ -58,6 +60,7 @@ public:
     void SetSpeed(double speed) override {mSpeed = speed;};
     void InstallPhysics(std::shared_ptr<b2World> world) override;
     void Rotate(double rotation, double speed) override;
+    wxPoint GetShaftPosition();
     /**
     * Get a pointer to the source object
     * @return Pointer to RotationSource object

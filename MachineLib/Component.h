@@ -48,10 +48,10 @@ public:
 //     * @param point
 //     */
 //    virtual void SetPosition(wxPoint point) {mMachine = point;}
-    /**
-     * Sets the image of component
-     */
-    virtual void SetImage(const std::wstring &filename);
+//    /**
+//     * Sets the image of component
+//     */
+//    virtual void SetImage(const std::wstring &filename);
     /**
      * Sets the speed of the component
      * @param speed

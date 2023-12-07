@@ -21,7 +21,7 @@ void Body::AddPoint(int x, int y)
 
 void Body::Update(double elapsed)
 {
-    //Update(elapsed);
+
 }
 void Body::Draw(std::shared_ptr<wxGraphicsContext>graphics, int x, int y)
 {
@@ -29,8 +29,6 @@ void Body::Draw(std::shared_ptr<wxGraphicsContext>graphics, int x, int y)
 }
 void Body::Reset()
 {
-    //mPolygon.InstallPhysics(GetWorld());
-    //Component::Reset();
 
 }
 void Body::SetDynamic()

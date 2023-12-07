@@ -12,9 +12,9 @@ void Component::SetMachine(Machine *machine)
     mMachine = machine;
 }
 
-void Component::SetImage(const std::wstring &filename)
-{
-}
+//void Component::SetImage(const std::wstring &filename)
+//{
+//}
 
 void Component::Draw(std::shared_ptr<wxGraphicsContext> graphics, int x, int y)
 {

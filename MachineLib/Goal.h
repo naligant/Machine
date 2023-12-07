@@ -35,6 +35,7 @@ public:
     void Update(double elapsed) override;
     void Reset() override;
     void SetPosition(double x, double y);
+    void InstallPhysics(std::shared_ptr<b2World> world) override;
 
 };
 

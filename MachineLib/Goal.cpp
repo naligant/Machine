@@ -128,3 +128,8 @@ void Goal::Reset()
 {
 
 }
+void Goal::InstallPhysics(std::shared_ptr<b2World> world)
+{
+    mPost.InstallPhysics(world);
+    mGoal.InstallPhysics(world);
+}

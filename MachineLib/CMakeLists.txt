@@ -36,6 +36,8 @@ set(SOURCE_FILES
         RotationSink.cpp
         RotationSink.h
         IRotationSource.h
+        Pulley.cpp
+        Pulley.h
 )
 
 # Removed:
