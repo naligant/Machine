@@ -14,7 +14,7 @@ void Body::Rectangle(int x, int y, int width, int height)
     mPolygon.Rectangle(x, y, width, height);
 }
 
-void Body::AddPoint(int x, int y)
+void Body::AddPoint(double x, double y)
 {
     mPolygon.AddPoint(x, y);
 }
@@ -74,4 +74,14 @@ void Body::InstallPhysics(std::shared_ptr<b2World> world)
 void Body::Rotate(double rotation, double speed)
 {
     mPolygon.SetAngularVelocity(-speed);
+}
+
+void Body::BottomCenteredRectangle(int x, int y)
+{
+    mPolygon.BottomCenteredRectangle(x, y);
+}
+
+void Body::SetInitialRotation(double rotation)
+{
+   mPolygon.SetInitialRotation(rotation);
 }

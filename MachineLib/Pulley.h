@@ -28,7 +28,7 @@ private:
     RotationSink mSink;
     /// The vector of pulley objects
     std::shared_ptr<Pulley> mPulley = nullptr;
-//    /// Rotation source for this component
+    /// Rotation source for this component
 //    RotationSource mSource;
 
     IRotationSource* mSource = nullptr;
@@ -47,6 +47,7 @@ public:
     void SetImage(const std::wstring &filename);
     void SetPosition(double x, double y);
     void SetSource(IRotationSource* source) override;
+    IRotationSource* GetSource() {return mSource;}
     //void SetParent(Pulley* pulley) {mParent = pulley;}
     //void SetInitialPosition(double x, double y);
     //RotationSink *GetSink() {return &mSink;}

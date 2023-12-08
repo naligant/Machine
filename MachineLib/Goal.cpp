@@ -89,7 +89,7 @@ void Goal::Draw(std::shared_ptr<wxGraphicsContext> graphics, int x, int y)
     graphics->SetBrush(wxBrush(ScoreboardBackgroundColor));
     graphics->SetPen(wxPen(wxColour(0, 0, 0), ScoreboarderLineWidth));
 
-    graphics->DrawRectangle(ScoreboardRectangle.m_x + mX,ScoreboardRectangle.m_y + mY, ScoreboardRectangle.m_width, ScoreboardRectangle.m_height);
+    graphics->DrawRectangle(ScoreboardRectangle.m_x + mPosition.x,ScoreboardRectangle.m_y + mPosition.y, ScoreboardRectangle.m_width, ScoreboardRectangle.m_height);
 
     // Set the font for the scoreboard text
     wxFont font(ScoreboardFontSize,
@@ -103,11 +103,11 @@ void Goal::Draw(std::shared_ptr<wxGraphicsContext> graphics, int x, int y)
 
     // Get the formatted string
     std::string formattedNumber = ss.str();
-    graphics->DrawText(formattedNumber, ScoreboardTextLocation.m_x + mX,  ScoreboardTextLocation.m_y + mY - 17);
+    graphics->DrawText(formattedNumber, ScoreboardTextLocation.m_x + mPosition.x,  ScoreboardTextLocation.m_y + mPosition.y - 17);
 
     graphics->PopState();
 
-    mPolygon.DrawPolygon(graphics, mX, mY,0);
+    mPolygon.DrawPolygon(graphics, mPosition.x, mPosition.y,0);
 //    mPost.Draw(graphics);
 //    mGoal.Draw(graphics);
 }
@@ -116,8 +116,8 @@ void Goal::SetPosition(double x, double y)
 {
     mPost.SetInitialPosition(x + PostPosition.m_x, y + PostPosition.m_y);
     mGoal.SetInitialPosition(x + GoalPosition.m_x, y + GoalPosition.m_y);
-    mX = x;
-    mY = y;
+    mPosition.x = x;
+    mPosition.y = y;
 }
 
 void Goal::Update(double elapsed)

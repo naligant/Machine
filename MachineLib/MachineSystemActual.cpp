@@ -7,7 +7,10 @@
 #include "MachineSystemActual.h"
 #include "Machine.h"
 #include "MachineCFactory.h"
+#include "Machine1Factory.h"
+#include "HamsterAndConveyorFactory.h"
 #include "MachineSystemFactory.h"
+
 
 MachineSystemActual::MachineSystemActual(std::wstring resourcesDir) : mResourcesDir(resourcesDir)
 {
@@ -87,13 +90,14 @@ void MachineSystemActual::SetMachineNumber(int machine)
 {
    if (machine == 1)
    {
-       MachineCFactory machineCFactory(mResourcesDir);
-       mMachine = machineCFactory.Create();
+       MachineCFactory machine(mResourcesDir);
+       mMachine = machine.Create();
        mMachine->Reset();
    }
    else if (machine == 2)
    {
-       mMachine = std::make_shared<Machine>(machine);
+       Machine1Factory machine(mResourcesDir);
+       mMachine = machine.Create();
        mMachine->Reset();
    }
 

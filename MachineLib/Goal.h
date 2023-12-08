@@ -14,8 +14,7 @@
 class Goal : public Component, public b2ContactListener
 {
 private:
-    double mX = 0.0;
-    double mY = 0.0;
+    wxPoint mPosition;
     cse335::Polygon mPolygon;
     cse335::PhysicsPolygon mPost;
     cse335::PhysicsPolygon mGoal;

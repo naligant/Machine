@@ -38,6 +38,10 @@ set(SOURCE_FILES
         IRotationSource.h
         Pulley.cpp
         Pulley.h
+        HamsterAndConveyorFactory.cpp
+        HamsterAndConveyorFactory.h
+        Conveyor.cpp
+        Conveyor.h
 )
 
 # Removed:

@@ -10,6 +10,7 @@
 #include "SpartyFactory.h"
 #include "Actor.h"
 #include "ImageDrawable.h"
+#include "MachineAdapter.h"
 
 
 /// Directory within resources that contains the images.
@@ -51,6 +52,9 @@ std::shared_ptr<Picture> PictureFactory::Create(std::wstring resourcesDir)
 
     sparty->SetPosition(wxPoint(550, 620));
     picture->AddActor(sparty);
+
+    MachineSystemFactory factory(resourcesDir);
+    std::shared_ptr<IMachineSystem> machine = factory.CreateMachineSystem();
 
     return picture;
 }

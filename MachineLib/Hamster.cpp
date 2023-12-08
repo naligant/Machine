@@ -86,6 +86,10 @@ void Hamster::Draw(std::shared_ptr<wxGraphicsContext> graphics, int x, int y)
 }
 void Hamster::Update(double elapsed)
 {
+    if (mIsRunning)
+    {
+        mIsInitialRunning = true;
+    }
     if (mIsRunning || mIsInitialRunning)
     {
         mRotation += -mSpeed * elapsed;

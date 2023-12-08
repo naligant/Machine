@@ -32,7 +32,7 @@ public:
     void operator=(const Body &) = delete;
 
     void Rectangle(int x, int y, int width, int height);
-    void AddPoint(int x, int y);
+    void AddPoint(double x, double y);
     void Update(double elapsed) override;
     void Draw(std::shared_ptr<wxGraphicsContext>graphics, int x, int y) override;
     void Reset() override;
@@ -45,6 +45,8 @@ public:
     void InstallPhysics(std::shared_ptr<b2World> world) override;
     void SetSource(IRotationSource* source) override {mSource = source;}
     void Rotate(double rotation, double speed) override;
+    void BottomCenteredRectangle(int x, int y);
+    void SetInitialRotation(double rotation);
 
     RotationSink *GetSink() {return &mSink;}
 
