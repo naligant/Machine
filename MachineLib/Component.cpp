@@ -16,7 +16,7 @@ void Component::SetMachine(Machine *machine)
 //{
 //}
 
-void Component::Draw(std::shared_ptr<wxGraphicsContext> graphics, int x, int y)
+void Component::Draw(std::shared_ptr<wxGraphicsContext> graphics)
 {
 }
 /**

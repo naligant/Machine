@@ -74,6 +74,8 @@ public:
 
     std::shared_ptr<b2World> GetWorld() {return mWorld;}
 
+    std::shared_ptr<ContactListener> GetContactListener() {return mContactListener;}
+
 
     /** Iterator that iterates over the actors in a picture */
     class ComponentIter

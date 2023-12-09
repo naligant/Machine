@@ -41,7 +41,7 @@ void Machine::Draw(std::shared_ptr<wxGraphicsContext> graphics)
 {
     for (auto component : mComponents)
     {
-        component->Draw(graphics,0,0);
+        component->Draw(graphics);
     }
 }
 

@@ -12,9 +12,8 @@
 #include "Polygon.h"
 #include "RotationSource.h"
 #include <b2_world_callbacks.h>
-#include "IRotationSource.h"
 
-class Hamster : public Component, public b2ContactListener, public IRotationSource
+class Hamster : public Component, public b2ContactListener
 {
 private:
     ///boolean to mark if hamster is running
@@ -52,14 +51,14 @@ public:
 //    void operator=(const Hamster &) = delete;
 
     void BeginContact(b2Contact* contact) override;
-    void Draw(std::shared_ptr<wxGraphicsContext> graphics, int x, int y) override;
+    void Draw(std::shared_ptr<wxGraphicsContext> graphics) override;
     void Update(double elapsed) override;
     void Reset() override;
     void SetInitiallyRunning(bool running);
     void SetPosition(double x, double y);
     void SetSpeed(double speed) override {mSpeed = speed;};
     void InstallPhysics(std::shared_ptr<b2World> world) override;
-    void Rotate(double rotation, double speed) override;
+    void Rotate(double rotation, double speed);
     wxPoint GetShaftPosition();
     /**
     * Get a pointer to the source object

@@ -8,14 +8,14 @@
 #ifndef CANADIANEXPERIENCE_CANADIANEXPERIENCELIB_MACHINEADAPTER_H
 #define CANADIANEXPERIENCE_CANADIANEXPERIENCELIB_MACHINEADAPTER_H
 #include "Drawable.h"
-#include "../MachineLib/IMachineSystem.h"
+#include <machine-api.h>
 class MachineAdapter : public Drawable
 {
 private:
     std::shared_ptr<IMachineSystem> mMachineSystem;
     int mStartTime = 0;
 public:
-    MachineAdapter(const std::wstring name);
+    MachineAdapter(const std::wstring& name, const std::wstring resourcesDir);
     void Draw(std::shared_ptr<wxGraphicsContext> graphics) override;
     bool HitTest(wxPoint pos) override;
     void SetPosition(wxPoint pos);

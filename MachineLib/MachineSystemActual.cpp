@@ -96,6 +96,8 @@ void MachineSystemActual::SetMachineNumber(int machine)
    }
    else if (machine == 2)
    {
+//       mMachine = std::make_shared<Machine>(2);
+//       mMachine->Reset();
        Machine1Factory machine(mResourcesDir);
        mMachine = machine.Create();
        mMachine->Reset();

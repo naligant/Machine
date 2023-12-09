@@ -11,6 +11,7 @@
 #include "Actor.h"
 #include "ImageDrawable.h"
 #include "MachineAdapter.h"
+#include <machine-api.h>
 
 
 /// Directory within resources that contains the images.
@@ -53,8 +54,11 @@ std::shared_ptr<Picture> PictureFactory::Create(std::wstring resourcesDir)
     sparty->SetPosition(wxPoint(550, 620));
     picture->AddActor(sparty);
 
-    MachineSystemFactory factory(resourcesDir);
-    std::shared_ptr<IMachineSystem> machine = factory.CreateMachineSystem();
+    auto machineAdapter =
+        std::make_shared<MachineAdapter>(L"Background", resourcesDir);
+    wxPoint point = wxPoint(500, 600);
+    machineAdapter->SetPosition(point);
+    background->AddDrawable(machineAdapter);
 
     return picture;
 }

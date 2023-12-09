@@ -82,7 +82,7 @@ void Goal::PreSolve(b2Contact *contact, const b2Manifold *oldManifold)
     contact->SetEnabled(false);
 }
 
-void Goal::Draw(std::shared_ptr<wxGraphicsContext> graphics, int x, int y)
+void Goal::Draw(std::shared_ptr<wxGraphicsContext> graphics)
 {
     graphics->PushState();
     // Set the background color
@@ -103,8 +103,9 @@ void Goal::Draw(std::shared_ptr<wxGraphicsContext> graphics, int x, int y)
 
     // Get the formatted string
     std::string formattedNumber = ss.str();
-    graphics->DrawText(formattedNumber, ScoreboardTextLocation.m_x + mPosition.x,  ScoreboardTextLocation.m_y + mPosition.y - 17);
-
+    graphics->Translate(ScoreboardTextLocation.m_x + mPosition.x,  ScoreboardTextLocation.m_y + mPosition.y);
+    graphics->Scale(1, -1);
+    graphics->DrawText(formattedNumber, 0,  0);
     graphics->PopState();
 
     mPolygon.DrawPolygon(graphics, mPosition.x, mPosition.y,0);
@@ -130,6 +131,8 @@ void Goal::Reset()
 }
 void Goal::InstallPhysics(std::shared_ptr<b2World> world)
 {
+    auto contactListener = GetContactListener();
     mPost.InstallPhysics(world);
     mGoal.InstallPhysics(world);
+    contactListener->Add(mGoal.GetBody(), this);
 }

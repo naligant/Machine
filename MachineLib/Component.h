@@ -18,11 +18,6 @@ private:
     Machine* mMachine = nullptr;
 public:
     /**
-     * Determines if an object requires physics or not
-     * @return
-     */
-    virtual bool IsPhysics() {return mPhysics;}
-    /**
      * Updates the machines
      * @param elapsed
      */
@@ -33,7 +28,7 @@ public:
      * @param x
      * @param y
      */
-    virtual void Draw(std::shared_ptr<wxGraphicsContext> graphics, int x, int y);
+    virtual void Draw(std::shared_ptr<wxGraphicsContext> graphics);
     /**
      * Sets the angle at which it rotates
      * @param rotation
@@ -61,6 +56,10 @@ public:
     void SetMachine(Machine *machine);
 
     virtual void InstallPhysics(std::shared_ptr<b2World> world);
+
+    wxPoint GetMachinePosition() {return mMachine->GetLocation();}
+
+    std::shared_ptr<ContactListener> GetContactListener() {return mMachine->GetContactListener();};
 
 };
 

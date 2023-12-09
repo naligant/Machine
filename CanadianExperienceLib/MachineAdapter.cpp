@@ -5,8 +5,14 @@
 
 #include "MachineAdapter.h"
 
+MachineAdapter::MachineAdapter(const std::wstring& name, const std::wstring resourcesDir) : Drawable(name)
+{
+    MachineSystemFactory factory(resourcesDir);
+    mMachineSystem = factory.CreateMachineSystem();
+}
 void MachineAdapter::Draw(std::shared_ptr<wxGraphicsContext> graphics)
 {
+    mMachineSystem->SetLocation(mPlacedPosition);
     mMachineSystem->DrawMachine(graphics);
 }
 
@@ -22,5 +28,6 @@ bool MachineAdapter::HitTest(wxPoint pos)
 
 void MachineAdapter::SetPosition(wxPoint pos)
 {
-    mMachineSystem->SetLocation(GetPosition());
+    //SetPosition(pos);
+    mMachineSystem->SetLocation(pos);
 }

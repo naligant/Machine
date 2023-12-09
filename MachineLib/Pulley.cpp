@@ -5,14 +5,15 @@
 #include "pch.h"
 #include "Pulley.h"
 
-Pulley::Pulley(double radius) : mSink(this)
+Pulley::Pulley(double radius) : mSource(this)
 {
+
     mRadius = radius;
     mWheel.CenteredSquare(mRadius * 2);
 }
 
 
-void Pulley::Draw(std::shared_ptr<wxGraphicsContext> graphics, int x, int y)
+void Pulley::Draw(std::shared_ptr<wxGraphicsContext> graphics)
 {
     if (mPulley)
     {
@@ -47,7 +48,7 @@ void Pulley::Update(double elapsed)
     if (mPulley)
     {
         mPulley->mRotation += -mSpeed * elapsed;
-        mSource->Rotate(mRotation, mSpeed);
+        mPulley->mSource.Rotate(mRotation, mSpeed);
     }
 }
 
@@ -65,14 +66,6 @@ void Pulley::SetPosition(double x, double y)
 {
    mX = x;
    mY = y;
-}
-void Pulley::SetSource(IRotationSource* source)
-{
-    if (mPulley)
-    {
-        mPulley->mSource = this;
-    }
-    mSource = source;
 }
 void Pulley::Rotate(double rotation, double speed)
 {

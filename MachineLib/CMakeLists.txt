@@ -33,9 +33,6 @@ set(SOURCE_FILES
         RotationSource.cpp
         RotationSource.h
         IRotationSink.h
-        RotationSink.cpp
-        RotationSink.h
-        IRotationSource.h
         Pulley.cpp
         Pulley.h
         HamsterAndConveyorFactory.cpp

@@ -10,11 +10,11 @@
 //#include "Component.h"
 class IRotationSource;
 class IRotationSink;
-
+class Component;
 class RotationSource
 {
 private:
-    IRotationSource* mComponent = nullptr;
+    Component* mComponent = nullptr;
     std::vector<std::shared_ptr<IRotationSink>> mSink;
 
 public:
@@ -24,7 +24,7 @@ public:
     /// Assignment operator (disabled)
     void operator=(const RotationSource &) = delete;
 
-    RotationSource(IRotationSource* component);
+    RotationSource(Component* component);
 
     void Rotate(double rotation, double speed);
 

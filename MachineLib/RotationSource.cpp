@@ -5,16 +5,14 @@
 
 #include "RotationSource.h"
 #include "IRotationSink.h"
-#include "IRotationSource.h"
 
-RotationSource::RotationSource(IRotationSource* component)
+RotationSource::RotationSource(Component* component)
 {
     mComponent = component;
 }
 void RotationSource::AddSink(std::shared_ptr<IRotationSink> sink)
 {
     mSink.push_back(sink);
-    sink->SetSource(mComponent);
 
 }
 

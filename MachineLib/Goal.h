@@ -30,7 +30,7 @@ public:
 
     void BeginContact(b2Contact* contact) override;
     void PreSolve(b2Contact *contact, const b2Manifold *oldManifold) override;
-    void Draw(std::shared_ptr<wxGraphicsContext> graphics, int x, int y) override;
+    void Draw(std::shared_ptr<wxGraphicsContext> graphics) override;
     void Update(double elapsed) override;
     void Reset() override;
     void SetPosition(double x, double y);

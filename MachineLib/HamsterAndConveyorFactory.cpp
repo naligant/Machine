@@ -21,7 +21,7 @@ void HamsterAndConveyorFactory::Create(wxPoint2DDouble hamsterPosition, wxPoint2
     auto hamster = std::make_shared<Hamster>(mImagesDir);
     mHamster = hamster;
     hamster->SetPosition(hamsterPosition.m_x, hamsterPosition.m_y);
-    hamster->SetInitiallyRunning(true);
+//    hamster->SetInitiallyRunning(true);
     mMachine->AddComponent(hamster);
     auto hamsterShaft = hamster->GetShaftPosition();
 
@@ -46,7 +46,7 @@ void HamsterAndConveyorFactory::Create(wxPoint2DDouble hamsterPosition, wxPoint2
 
     pulley1->Drive(pulley2);
 
-    //pulley2->GetSource()->AddSink(conveyor);
+    pulley2->GetSource()->AddSink(conveyor);
 }
 
 /**

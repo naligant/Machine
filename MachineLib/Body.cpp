@@ -5,7 +5,7 @@
 
 #include "pch.h"
 #include "Body.h"
-Body::Body() : mSink(this)
+Body::Body()
 {
 }
 
@@ -23,7 +23,7 @@ void Body::Update(double elapsed)
 {
 
 }
-void Body::Draw(std::shared_ptr<wxGraphicsContext>graphics, int x, int y)
+void Body::Draw(std::shared_ptr<wxGraphicsContext>graphics)
 {
     mPolygon.Draw(graphics);
 }

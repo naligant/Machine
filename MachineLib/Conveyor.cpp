@@ -16,21 +16,18 @@ const auto ConveyorSize = wxSize(125, 14);
 /// The conveyor image to use
 const std::wstring ConveyorImageName = L"/conveyor.png";
 
-Conveyor::Conveyor(const std::wstring imagesDir) : mSink(this)
+Conveyor::Conveyor(const std::wstring imagesDir)
 {
     mConveyor.BottomCenteredRectangle(ConveyorSize);
     mConveyor.SetImage(imagesDir + ConveyorImageName);
 }
-//void Conveyor::TransferMotion()
-//{
-//
-//}
+
 void Conveyor::PreSolve(b2Contact *contact, const b2Manifold *oldManifold)
 {
 
     contact->SetTangentSpeed(mSpeed);
 }
-void Conveyor::Draw(std::shared_ptr<wxGraphicsContext> graphics, int x, int y)
+void Conveyor::Draw(std::shared_ptr<wxGraphicsContext> graphics)
 {
     mConveyor.Draw(graphics);
 }
@@ -41,16 +38,6 @@ void Conveyor::Reset()
 
 void Conveyor::Update(double elapsed)
 {
-    auto contact = mConveyor.GetBody()->GetContactList();
-    while(contact != nullptr)
-    {
-        if(contact->contact->IsTouching())
-        {
-            contact->other->SetLinearVelocity(b2Vec2(mSpeed, 0));
-        }
-
-        contact = contact->next;
-    }
 }
 void Conveyor::SetPosition(wxPoint2DDouble point)
 {
@@ -68,7 +55,16 @@ wxPoint Conveyor::GetShaftPosition()
 void Conveyor::Rotate(double rotation, double speed)
 {
     mSpeed = speed;
-    mConveyor.SetAngularVelocity(-speed);
+    auto contact = mConveyor.GetBody()->GetContactList();
+    while(contact != nullptr)
+    {
+        if(contact->contact->IsTouching())
+        {
+            contact->other->SetLinearVelocity(b2Vec2(speed, 0));
+        }
+
+        contact = contact->next;
+    }
 }
 
 void Conveyor::InstallPhysics(std::shared_ptr<b2World> world)

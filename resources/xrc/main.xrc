@@ -49,6 +49,10 @@
 					<label>Timeline Propoerties...</label>
 					<help></help>
 				</object>
+				<object class="wxMenuItem" name="EditMachine">
+					<label>Machine Number</label>
+					<help></help>
+				</object>
 			</object>
 			<object class="wxMenu" name="PlayMenu">
 				<label>_Play</label>
@@ -218,6 +222,43 @@
 						<border>5</border>
 						<object class="wxButton" name="wxID_CANCEL">
 							<label>&amp;Cancel</label>
+						</object>
+					</object>
+				</object>
+			</object>
+		</object>
+	</object>
+	<object class="wxDialog" name="MachineDlg">
+		<style>wxDEFAULT_DIALOG_STYLE</style>
+		<size>239,145</size>
+		<title></title>
+		<centered>1</centered>
+		<object class="wxBoxSizer">
+			<orient>wxVERTICAL</orient>
+			<object class="sizeritem">
+				<option>1</option>
+				<flag>wxEXPAND</flag>
+				<border>5</border>
+				<object class="wxGridSizer">
+					<rows>0</rows>
+					<cols>2</cols>
+					<vgap>0</vgap>
+					<hgap>0</hgap>
+					<object class="sizeritem">
+						<option>0</option>
+						<flag>wxALL</flag>
+						<border>5</border>
+						<object class="wxStaticText" name="m_staticText4">
+							<label>Machine Number:</label>
+							<wrap>-1</wrap>
+						</object>
+					</object>
+					<object class="sizeritem">
+						<option>0</option>
+						<flag>wxALL</flag>
+						<border>5</border>
+						<object class="wxTextCtrl" name="MachineDlgNum">
+							<value></value>
 						</object>
 					</object>
 				</object>

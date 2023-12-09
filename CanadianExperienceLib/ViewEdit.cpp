@@ -12,6 +12,7 @@
 #include "Picture.h"
 #include "Actor.h"
 #include "Drawable.h"
+//#include<machine-api.h>
 
 
 /// A scaling factor, converts mouse motion to rotation in radians
@@ -212,3 +213,11 @@ void ViewEdit::OnUpdateEditRotate(wxUpdateUIEvent& event)
     event.Check(mMode == Mode::Rotate);
 }
 
+//void ViewEdit::OnEditMachine(wxCommandEvent& event)
+//{
+//    MachineDialog dlg(this->GetParent(), machine);
+//    if (dlg.ShowModal() == wxID_OK)
+//    {
+//        // A machine has been selected
+//    }
+//}
