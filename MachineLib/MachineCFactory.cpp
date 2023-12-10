@@ -31,7 +31,7 @@ MachineCFactory::MachineCFactory(std::wstring resourcesDir)
  */
 std::shared_ptr<Machine> MachineCFactory::Create()
 {
-    auto machine = std::make_shared<Machine>(1);
+    auto machine = std::make_shared<Machine>(2);
 
     // Notice: All dimensions are in centimeters and assume
     // the Y axis is positive in the up direction.

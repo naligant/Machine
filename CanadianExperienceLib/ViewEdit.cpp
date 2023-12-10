@@ -12,6 +12,7 @@
 #include "Picture.h"
 #include "Actor.h"
 #include "Drawable.h"
+#include "MachineAdapter.h"
 //#include<machine-api.h>
 
 
@@ -36,6 +37,9 @@ ViewEdit::ViewEdit(wxFrame* parent) :wxScrolledCanvas(parent, wxID_ANY)
     parent->Bind(wxEVT_COMMAND_MENU_SELECTED, &ViewEdit::OnEditRotate, this, XRCID("EditRotate"));
     parent->Bind(wxEVT_UPDATE_UI, &ViewEdit::OnUpdateEditMove, this, XRCID("EditMove"));
     parent->Bind(wxEVT_UPDATE_UI, &ViewEdit::OnUpdateEditRotate, this, XRCID("EditRotate"));
+    parent->Bind(wxEVT_COMMAND_MENU_SELECTED,
+         &ViewEdit::OnEditMachineNumber, this,
+         XRCID("EditMachine"));
 }
 
 /**
@@ -221,3 +225,12 @@ void ViewEdit::OnUpdateEditRotate(wxUpdateUIEvent& event)
 //        // A machine has been selected
 //    }
 //}
+
+/**
+ * Handle an Edit>Machine Number menu option
+ * @param event The menu event
+ */
+void ViewEdit::OnEditMachineNumber(wxCommandEvent& event)
+{
+    GetPicture()->GetMachineNum()->ShowDialogBox(this->GetParent());
+}

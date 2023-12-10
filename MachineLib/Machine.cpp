@@ -39,10 +39,17 @@ Machine::Machine(int machine)
 */
 void Machine::Draw(std::shared_ptr<wxGraphicsContext> graphics)
 {
+    graphics->PushState();
+    graphics->Translate(mLocation.x,mLocation.y);
+    graphics->Scale(mPixelsPerCentimeter, -mPixelsPerCentimeter);
+
     for (auto component : mComponents)
     {
         component->Draw(graphics);
     }
+
+
+    graphics->PopState();
 }
 
 void Machine::AddComponent(std::shared_ptr<Component> component)

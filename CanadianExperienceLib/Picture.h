@@ -12,6 +12,7 @@
 
 class PictureObserver;
 class Actor;
+class MachineAdapter;
 
 /**
  *  Class that represents our animation picture
@@ -30,6 +31,8 @@ private:
 
     /// The animation timeline
     Timeline mTimeline;
+
+    std::shared_ptr<MachineAdapter> mAdapter;
 
 public:
     Picture();
@@ -66,7 +69,8 @@ public:
     void RemoveObserver(PictureObserver *observer);
     void UpdateObservers();
     void Draw(std::shared_ptr<wxGraphicsContext> graphics);
-
+    std::shared_ptr<MachineAdapter> GetMachineNum() {return mAdapter;}
+    void SetMachineNum(std::shared_ptr<MachineAdapter> adapter) {mAdapter = adapter;}
     void AddActor(std::shared_ptr<Actor> actor);
 
     /** Iterator that iterates over the actors in a picture */

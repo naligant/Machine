@@ -9,9 +9,11 @@
 #define CANADIANEXPERIENCE_ACTOR_H
 
 #include "AnimChannelPoint.h"
+#include "MachineAdapter.h"
 
 class Drawable;
-class Picture;
+//class Picture;
+#include "Picture.h"
 
 /**
  * Class for actors in our drawings.
@@ -44,6 +46,8 @@ private:
 
     /// The actor position channel
     AnimChannelPoint mChannel;
+
+//    std::shared_ptr<MachineAdapter> mAdapter;
 
 public:
     virtual ~Actor() {}
@@ -122,6 +126,8 @@ public:
      * @return Pointer to animation channel
      */
     AnimChannelPoint *GetPositionChannel() { return &mChannel; }
+
+    void SetMachineNum(std::shared_ptr<MachineAdapter> adapter) {mPicture->SetMachineNum(adapter);}
 };
 
 #endif //CANADIANEXPERIENCE_ACTOR_H

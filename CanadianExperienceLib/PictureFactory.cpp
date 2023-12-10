@@ -55,9 +55,9 @@ std::shared_ptr<Picture> PictureFactory::Create(std::wstring resourcesDir)
     picture->AddActor(sparty);
 
     auto machineAdapter =
-        std::make_shared<MachineAdapter>(L"Background", resourcesDir);
-    wxPoint point = wxPoint(500, 600);
-    machineAdapter->SetPosition(point);
+        std::make_shared<MachineAdapter>(L"MachineOne", resourcesDir);
+    machineAdapter->SetPosition(wxPoint(550, 1050));
+    background->SetMachineNum(machineAdapter);
     background->AddDrawable(machineAdapter);
 
     return picture;

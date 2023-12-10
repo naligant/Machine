@@ -33,7 +33,7 @@ void MachineSystemActual::SetLocation(wxPoint location)
  */
 wxPoint MachineSystemActual::GetLocation()
 {
-    return mMachine->GetLocation();
+    mMachine->GetLocation();
 }
 
 /**
@@ -42,25 +42,7 @@ wxPoint MachineSystemActual::GetLocation()
 */
 void MachineSystemActual::DrawMachine(std::shared_ptr<wxGraphicsContext> graphics)
 {
-/// How many pixels there are for each CM
-    double mPixelsPerCentimeter = 1.5;
-
-    graphics->PushState();
-    graphics->Translate(mMachine->GetLocation().x, mMachine->GetLocation().y);
-    graphics->Scale(mPixelsPerCentimeter, -mPixelsPerCentimeter);
-
-    // Draw your machine assuming an origin of 0,0
     mMachine->Draw(graphics);
-
-//    graphics->SetPen(*wxRED_PEN);
-//    graphics->StrokeLine(-300, 0, 300, 0);
-//    graphics->StrokeLine(0, 0, 0, 25);
-//    graphics->StrokeLine(-300, 0, -300, 300);
-//    graphics->StrokeLine(300, 0, 300, 300);
-
-
-    graphics->PopState();
-
 }
 
 /**
@@ -90,15 +72,13 @@ void MachineSystemActual::SetMachineNumber(int machine)
 {
    if (machine == 1)
    {
-       MachineCFactory machine(mResourcesDir);
+       Machine1Factory machine(mResourcesDir);
        mMachine = machine.Create();
        mMachine->Reset();
    }
    else if (machine == 2)
    {
-//       mMachine = std::make_shared<Machine>(2);
-//       mMachine->Reset();
-       Machine1Factory machine(mResourcesDir);
+       MachineCFactory machine(mResourcesDir);
        mMachine = machine.Create();
        mMachine->Reset();
    }

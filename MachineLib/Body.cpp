@@ -23,7 +23,7 @@ void Body::Update(double elapsed)
 {
 
 }
-void Body::Draw(std::shared_ptr<wxGraphicsContext>graphics)
+void Body::Draw(std::shared_ptr<wxGraphicsContext> graphics)
 {
     mPolygon.Draw(graphics);
 }

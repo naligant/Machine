@@ -19,9 +19,10 @@ private:
     /// The installed contact filter
     std::shared_ptr<ContactListener> mContactListener;
     int mMachine;
-    int mX = 0;         ///< Machine x location
-    int mY = 0;         ///< Machine y location
+    wxPoint mLocation = wxPoint(0,0);
     int mFrame = 0;     ///< Current frame
+    /// How many pixels there are for each CM
+    double mPixelsPerCentimeter = 1.5;
 
     ///vector of components
     std::vector<std::shared_ptr<Component>> mComponents;
@@ -49,13 +50,13 @@ public:
     * Set the position for the root of the machine
     * @param location X,Y location in pixels
     */
-    void SetLocation(wxPoint location) { mX = location.x; mY = location.y; }
+    void SetLocation(wxPoint location) { mLocation = location; }
 
     /**
      * Get the root position of the machine
      * @return location x,y in pixels as a point
      */
-    wxPoint GetLocation() {return wxPoint(mX, mY);}
+    wxPoint GetLocation() {return mLocation;}
 
     void Draw(std::shared_ptr<wxGraphicsContext> graphics);
 
@@ -75,7 +76,6 @@ public:
     std::shared_ptr<b2World> GetWorld() {return mWorld;}
 
     std::shared_ptr<ContactListener> GetContactListener() {return mContactListener;}
-
 
     /** Iterator that iterates over the actors in a picture */
     class ComponentIter

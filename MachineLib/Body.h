@@ -29,7 +29,7 @@ public:
     void Rectangle(int x, int y, int width, int height);
     void AddPoint(double x, double y);
     void Update(double elapsed) override;
-    void Draw(std::shared_ptr<wxGraphicsContext>graphics) override;
+    void Draw(std::shared_ptr<wxGraphicsContext> graphics) override;
     void Reset() override;
     void SetDynamic();
     void SetKinematic();

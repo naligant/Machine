@@ -6,9 +6,10 @@
 
 #include <wx/xrc/xmlres.h>
 #include <wx/stdpaths.h>
+//#include <machine-api.h>
 
 #include "MainFrame.h"
-
+#include "MachineAdapter.h"
 #include "ViewEdit.h"
 #include "ViewTimeline.h"
 #include "Picture.h"
@@ -100,5 +101,3 @@ void MainFrame::OnClose(wxCloseEvent& event)
     mViewTimeline->Stop();
     Destroy();
 }
-
-

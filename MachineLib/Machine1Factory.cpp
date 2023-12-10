@@ -39,7 +39,7 @@ std::shared_ptr<Machine> Machine1Factory::Create()
     // In this solution the machine number is passed
     // to the working machine constructor, so it knows
     // its number.
-    auto machine = std::make_shared<Machine>(2);
+    auto machine = std::make_shared<Machine>(1);
 
     // Notice: All dimensions are in centimeters and assumes
     // the Y axis is positive in the up direction.

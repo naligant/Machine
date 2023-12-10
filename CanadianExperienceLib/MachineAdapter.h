@@ -13,6 +13,7 @@ class MachineAdapter : public Drawable
 {
 private:
     std::shared_ptr<IMachineSystem> mMachineSystem;
+    wxPoint mLocation = wxPoint(0,0);
     int mStartTime = 0;
 public:
     MachineAdapter(const std::wstring& name, const std::wstring resourcesDir);
@@ -21,6 +22,8 @@ public:
     void SetPosition(wxPoint pos);
     void Load(int machineID);
     void Save(int machineID);
+    void ShowDialogBox(wxWindow* mainFrame);
+    void SetMachineNumber(int machine);
 
 };
 

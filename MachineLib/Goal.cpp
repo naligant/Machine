@@ -115,8 +115,8 @@ void Goal::Draw(std::shared_ptr<wxGraphicsContext> graphics)
 
 void Goal::SetPosition(double x, double y)
 {
-    mPost.SetInitialPosition(x + PostPosition.m_x, y + PostPosition.m_y);
-    mGoal.SetInitialPosition(x + GoalPosition.m_x, y + GoalPosition.m_y);
+    mPost.SetInitialPosition(x + PostPosition.m_x , y + PostPosition.m_y );
+    mGoal.SetInitialPosition(x + GoalPosition.m_x , y + GoalPosition.m_y );
     mPosition.x = x;
     mPosition.y = y;
 }

@@ -31,6 +31,7 @@ private:
     void OnEditRotate(wxCommandEvent& event);
     void OnUpdateEditMove(wxUpdateUIEvent& event);
     void OnUpdateEditRotate(wxUpdateUIEvent& event);
+    void OnEditMachineNumber(wxCommandEvent& event);
 
     /// The last mouse position
     wxPoint mLastMouse = wxPoint(0, 0);
