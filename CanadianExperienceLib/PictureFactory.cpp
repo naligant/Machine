@@ -54,11 +54,26 @@ std::shared_ptr<Picture> PictureFactory::Create(std::wstring resourcesDir)
     sparty->SetPosition(wxPoint(550, 620));
     picture->AddActor(sparty);
 
-    auto machineAdapter =
+    int frameRate = background->GetPicture()->GetTimeline()->GetFrameRate();
+    auto machineOne =
         std::make_shared<MachineAdapter>(L"MachineOne", resourcesDir);
-    machineAdapter->SetPosition(wxPoint(550, 1050));
-    background->SetMachineNum(machineAdapter);
-    background->AddDrawable(machineAdapter);
+    machineOne->SetMachineNumber(1);
+    machineOne->SetPosition(wxPoint(500, 1050));
+    machineOne->SetTimeline(background->GetPicture()->GetTimeline());
+    machineOne->StartFrame(3 * frameRate);
+    machineOne->EndFrame(7 * frameRate);
+    background->SetMachineNum(machineOne);
+    background->AddDrawable(machineOne);
+
+    auto machineTwo =
+        std::make_shared<MachineAdapter>(L"MachineTwo", resourcesDir);
+    machineTwo->SetMachineNumber(2);
+    machineTwo->SetPosition(wxPoint(1500, 1050));
+    machineTwo->SetTimeline(background->GetPicture()->GetTimeline());
+    machineTwo->StartFrame(1 * frameRate);
+    machineTwo->EndFrame(5 * frameRate);
+    background->SetMachineNum(machineTwo);
+    background->AddDrawable(machineTwo);
 
     return picture;
 }

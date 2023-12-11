@@ -13,6 +13,8 @@
 #include <string>
 
 class Machine;
+class Body;
+class Conveyor;
 
 /**
  * Factory that creates just the parts of the machine
@@ -27,10 +29,24 @@ private:
     /// Path to the images directory
     std::wstring mImagesDir;
 
+    /// The possible domino colors
+    enum class DominoColor { Black, Red, Green, Blue };
+
+    /// Height of a Domino
+    const double DominoHeight = 25;
+
+    /// Width of a Domino
+    const double DominoWidth = 5;
+
 public:
     MachineCFactory(std::wstring resourcesDir);
 
     std::shared_ptr<Machine> Create();
+
+    std::shared_ptr<Body>  Domino(std::shared_ptr<Machine> machine, wxPoint2DDouble position, double rotation, DominoColor color);
+
+    void DominoStack(std::shared_ptr<Machine> machine, wxPoint2DDouble position);
+
 };
 
 #endif //CANADIANEXPERIENCE_MACHINELIB_MACHINECFACTORY_H

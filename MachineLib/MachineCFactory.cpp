@@ -10,6 +10,7 @@
 #include "Hamster.h"
 #include "Goal.h"
 #include "Pulley.h"
+#include "HamsterAndConveyorFactory.h"
 
 /// The images directory in resources
 const std::wstring ImagesDirectory = L"/images";
@@ -56,7 +57,7 @@ std::shared_ptr<Machine> MachineCFactory::Create()
     auto basketball1 = std::make_shared<Body>();
     basketball1->Circle(12);
     basketball1->SetImage(mImagesDir + L"/basketball1.png");
-    basketball1->SetInitialPosition(BeamX-186, 353);
+    basketball1->SetInitialPosition(BeamX-186, 312);
     basketball1->SetDynamic();
     basketball1->SetPhysics(1, 0.5, 0.6);
     machine->AddComponent(basketball1);
@@ -65,11 +66,54 @@ std::shared_ptr<Machine> MachineCFactory::Create()
     goal->SetPosition(270, 0);
     machine->AddComponent(goal);
 
+    //Top beam
+    const double Beam2X = -80;
+    auto beam = std::make_shared<Body>();
+    beam->BottomCenteredRectangle(300, 20);
+    beam->SetImage(mImagesDir + L"/beam.png");
+    beam->SetInitialPosition(Beam2X, 280);
+    machine->AddComponent(beam);
+
+    //Side beam
+    const double Beam3X = 140;
+    auto beam2 = std::make_shared<Body>();
+    beam2->BottomCenteredRectangle(20, 320);
+    beam2->SetImage(mImagesDir + L"/beam.png");
+    beam2->SetInitialPosition(Beam3X, 0);
+    machine->AddComponent(beam2);
+
+    //beam under
+    const double Beam4X = -20;
+    auto beam3 = std::make_shared<Body>();
+    beam3->BottomCenteredRectangle(300, 20);
+    beam3->SetImage(mImagesDir + L"/beam.png");
+    beam3->SetInitialPosition(Beam4X, 160);
+    machine->AddComponent(beam3);
+
+    //Domino stack
+    wxPoint position = wxPoint(Beam4X, 165);
+    for(int d=0; d<10; d++)
+    {
+        // Where to put this domino
+        auto dominos = position + wxPoint2DDouble(-70 + d * 15, 27);
+
+        Domino(machine, dominos, 0, DominoColor::Green);
+    }
+
+    //Second ball
+    auto ball1 = std::make_shared<Body>();
+    ball1->Circle(12);
+    ball1->SetImage(mImagesDir + L"/ball1.png");
+    ball1->SetInitialPosition(Beam4X-90, 192);
+    ball1->SetDynamic();
+    ball1->SetPhysics(1, 0.5, 0.6);
+    machine->AddComponent(ball1);
+
     //
-    // The hamster for the second-beam
+    // The hamster to start reaction
     //
     auto hamster = std::make_shared<Hamster>(mImagesDir);
-    hamster->SetPosition(-220, 185);
+    hamster->SetPosition(-240, 220);
     hamster->SetInitiallyRunning(true);      // Initially running
     hamster->SetSpeed(0.60);
     machine->AddComponent(hamster);
@@ -85,26 +129,121 @@ std::shared_ptr<Machine> MachineCFactory::Create()
     hamster->GetSource()->AddSink(arm);
     machine->AddComponent(arm);
 
-    auto hamster1 = std::make_shared<Hamster>(mImagesDir);
-    hamster1->SetSpeed(1.0);
+    //
+    // First conveyor with a ball sitting on it
+    //
+
+    HamsterAndConveyorFactory hamsterAndConveyorFactory(machine, mImagesDir);
+
+    hamsterAndConveyorFactory.Create(wxPoint2DDouble(-280, 20), wxPoint2DDouble(-220, 80));
+    //hamsterAndConveyorFactory.AddBall(40);
+    auto hamster1 = hamsterAndConveyorFactory.GetHamster();
+    auto conveyor1 = hamsterAndConveyorFactory.GetConveyor();
     hamster1->SetInitiallyRunning(true);
-    machine->AddComponent(hamster1);
-    hamster1->SetPosition(0, 150);
 
-    // The pulley driven by the hamster
-    auto pulley1 = std::make_shared<Pulley>(10);
-    pulley1->SetImage(mImagesDir + L"/pulley3.png");
-    pulley1->SetPosition(hamster1->GetShaftPosition().x, hamster1->GetShaftPosition().y);
-    machine->AddComponent(pulley1);
+    //Domino Stack 2
+    wxPoint beamposition = wxPoint(-50, 0);
+    DominoStack(machine, beamposition);
 
-    hamster1->GetSource()->AddSink(pulley1);
+    //Hamster and conveyor 2
+    hamsterAndConveyorFactory.Create(wxPoint2DDouble(35, 0), wxPoint2DDouble(160, 330));
+    //hamsterAndConveyorFactory.AddBall(40);
+    auto hamster2 = hamsterAndConveyorFactory.GetHamster();
+    auto conveyor2 = hamsterAndConveyorFactory.GetConveyor();
+    hamster1->SetSpeed(0.5);
 
-    auto pulley2 = std::make_shared<Pulley>(10);
-    pulley2->SetImage(mImagesDir + L"/pulley3.png");
-    pulley2->SetPosition(150, 250);
-    machine->AddComponent(pulley2);
+    //Third ball for goal
+    auto ball2= std::make_shared<Body>();
+    ball2->Circle(12);
+    ball2->SetImage(mImagesDir + L"/basketball2.png");
+    ball2->SetInitialPosition(130, 356);
+    ball2->SetDynamic();
+    ball2->SetPhysics(1, 0.5, 0.6);
+    machine->AddComponent(ball2);
 
-    pulley1->Drive(pulley2);
+//    auto hamster1 = std::make_shared<Hamster>(mImagesDir);
+//    hamster1->SetSpeed(1.0);
+//    hamster1->SetInitiallyRunning(true);
+//    machine->AddComponent(hamster1);
+//    hamster1->SetPosition(0, 150);
+//
+//    // The pulley driven by the hamster
+//    auto pulley1 = std::make_shared<Pulley>(10);
+//    pulley1->SetImage(mImagesDir + L"/pulley3.png");
+//    pulley1->SetPosition(hamster1->GetShaftPosition().x, hamster1->GetShaftPosition().y);
+//    machine->AddComponent(pulley1);
+//
+//    hamster1->GetSource()->AddSink(pulley1);
+//
+//    auto pulley2 = std::make_shared<Pulley>(10);
+//    pulley2->SetImage(mImagesDir + L"/pulley3.png");
+//    pulley2->SetPosition(150, 250);
+//    machine->AddComponent(pulley2);
+//
+//    pulley1->Drive(pulley2);
 
     return machine;
+}
+
+/**
+ * Create a Domino and add it to the machine.
+ *
+ * This has been created to make it easier to create
+ * a lot of dominos
+ *
+ * @param machine Machine to add the domino to
+ * @param position Position to place the center of the domino
+ * @param rotation Rotation in turns
+ * @param color Color code
+ * @return Returns the created domino body
+ */
+std::shared_ptr<Body>  MachineCFactory::Domino(std::shared_ptr<Machine> machine, wxPoint2DDouble position, double rotation, DominoColor color)
+{
+    auto x = position.m_x;
+    auto y = position.m_y;
+
+    auto domino = std::make_shared<Body>();
+    domino->Rectangle(-DominoWidth/2, -DominoHeight/2, DominoWidth, DominoHeight);
+    switch(color)
+    {
+        case DominoColor::Black:
+            domino->SetImage(mImagesDir + L"/domino-black.png");
+            break;
+
+        case DominoColor::Red:
+            domino->SetImage(mImagesDir + L"/domino-red.png");
+            break;
+
+        case DominoColor::Green:
+            domino->SetImage(mImagesDir + L"/domino-green.png");
+            break;
+
+        case DominoColor::Blue:
+            domino->SetImage(mImagesDir + L"/domino-blue.png");
+            break;
+    }
+
+    domino->SetInitialPosition(x, y);
+    domino->SetInitialRotation(rotation);
+    domino->SetDynamic();
+    machine->AddComponent(domino);
+
+    return domino;
+}
+
+void MachineCFactory::DominoStack(std::shared_ptr<Machine> machine, wxPoint2DDouble position)
+{
+    Domino(machine, position + wxPoint2DDouble(30, DominoHeight/2), 0, DominoColor::Red);
+    Domino(machine, position + wxPoint2DDouble(10, DominoHeight/2), 0, DominoColor::Blue);
+    Domino(machine, position + wxPoint2DDouble(20, DominoHeight + DominoWidth/2), 0.25, DominoColor::Green);
+
+    Domino(machine, position + wxPoint2DDouble(-10, DominoHeight/2), 0, DominoColor::Red);
+    Domino(machine, position + wxPoint2DDouble(-30, DominoHeight/2), 0, DominoColor::Green);
+    Domino(machine, position + wxPoint2DDouble(-20, DominoHeight + DominoWidth/2), 0.25, DominoColor::Black);
+
+    const int DominoLevel2 = DominoHeight + DominoWidth;
+
+    Domino(machine, position + wxPoint2DDouble(10, DominoLevel2 + DominoHeight/2), 0, DominoColor::Red);
+    Domino(machine, position + wxPoint2DDouble(-10, DominoLevel2 + DominoHeight/2), 0, DominoColor::Green);
+    Domino(machine, position + wxPoint2DDouble(0, DominoLevel2 + DominoHeight + DominoWidth/2), 0.25, DominoColor::Black);
 }

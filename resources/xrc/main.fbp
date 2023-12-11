@@ -968,10 +968,10 @@
             <property name="minimum_size"></property>
             <property name="name">MachineDlg</property>
             <property name="pos"></property>
-            <property name="size">239,145</property>
+            <property name="size">-1,-1</property>
             <property name="style">wxDEFAULT_DIALOG_STYLE</property>
             <property name="subclass">; ; forward_declare</property>
-            <property name="title"></property>
+            <property name="title">Machine Selector</property>
             <property name="tooltip"></property>
             <property name="two_step_creation">0</property>
             <property name="window_extra_style"></property>
@@ -1117,6 +1117,24 @@
                                 <property name="window_extra_style"></property>
                                 <property name="window_name"></property>
                                 <property name="window_style"></property>
+                            </object>
+                        </object>
+                        <object class="sizeritem" expanded="1">
+                            <property name="border">5</property>
+                            <property name="flag">wxEXPAND</property>
+                            <property name="proportion">1</property>
+                            <object class="wxStdDialogButtonSizer" expanded="1">
+                                <property name="Apply">0</property>
+                                <property name="Cancel">1</property>
+                                <property name="ContextHelp">0</property>
+                                <property name="Help">0</property>
+                                <property name="No">0</property>
+                                <property name="OK">1</property>
+                                <property name="Save">0</property>
+                                <property name="Yes">0</property>
+                                <property name="minimum_size"></property>
+                                <property name="name">m_sdbSizer2</property>
+                                <property name="permission">protected</property>
                             </object>
                         </object>
                     </object>

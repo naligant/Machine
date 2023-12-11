@@ -14,7 +14,10 @@ class MachineAdapter : public Drawable
 private:
     std::shared_ptr<IMachineSystem> mMachineSystem;
     wxPoint mLocation = wxPoint(0,0);
-    int mStartTime = 0;
+    Timeline* mTimeline;
+    int mStartFrame = 0;
+    int mEndFrame = 0;
+
 public:
     MachineAdapter(const std::wstring& name, const std::wstring resourcesDir);
     void Draw(std::shared_ptr<wxGraphicsContext> graphics) override;
@@ -24,6 +27,13 @@ public:
     void Save(int machineID);
     void ShowDialogBox(wxWindow* mainFrame);
     void SetMachineNumber(int machine);
+    void SetTimeline(Timeline* timeline) override;
+    void SetMachineFrame(int frame);
+    void StartFrame(int frame) {mStartFrame = frame;}
+    void EndFrame(int frame) {mEndFrame = frame;}
+//    void SetKeyframe() override;
+//    void GetKeyframe() override;
+//    double GetMachineTime();
 
 };
 

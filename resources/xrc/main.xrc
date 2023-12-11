@@ -230,8 +230,7 @@
 	</object>
 	<object class="wxDialog" name="MachineDlg">
 		<style>wxDEFAULT_DIALOG_STYLE</style>
-		<size>239,145</size>
-		<title></title>
+		<title>Machine Selector</title>
 		<centered>1</centered>
 		<object class="wxBoxSizer">
 			<orient>wxVERTICAL</orient>
@@ -259,6 +258,27 @@
 						<border>5</border>
 						<object class="wxTextCtrl" name="MachineDlgNum">
 							<value></value>
+						</object>
+					</object>
+					<object class="sizeritem">
+						<option>1</option>
+						<flag>wxEXPAND</flag>
+						<border>5</border>
+						<object class="wxStdDialogButtonSizer">
+							<object class="button">
+								<flag>wxALIGN_CENTER_HORIZONTAL|wxALL</flag>
+								<border>5</border>
+								<object class="wxButton" name="wxID_OK">
+									<label>&amp;OK</label>
+								</object>
+							</object>
+							<object class="button">
+								<flag>wxALIGN_CENTER_HORIZONTAL|wxALL</flag>
+								<border>5</border>
+								<object class="wxButton" name="wxID_CANCEL">
+									<label>&amp;Cancel</label>
+								</object>
+							</object>
 						</object>
 					</object>
 				</object>
