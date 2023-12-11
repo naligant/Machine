@@ -3,6 +3,7 @@
  * @author Prajeeth Naliganti
  */
 
+#include "pch.h"
 #include "MachineAdapter.h"
 #include "Timeline.h"
 
@@ -13,14 +14,16 @@ MachineAdapter::MachineAdapter(const std::wstring& name, const std::wstring reso
 }
 void MachineAdapter::Draw(std::shared_ptr<wxGraphicsContext> graphics)
 {
+    int machineFrame = 0;
     if (mTimeline->GetCurrentFrame() >= mStartFrame && mTimeline->GetCurrentFrame() <= mEndFrame)
     {
-        mMachineSystem->SetMachineFrame(mTimeline->GetCurrentFrame());
+        mMachineSystem->SetMachineFrame(mTimeline->GetCurrentFrame()-mStartFrame);
         double scale = 0.60f;
         graphics->PushState();
         graphics->Scale(scale, scale);
         mMachineSystem->DrawMachine(graphics);
         graphics->PopState();
+        machineFrame += 1;
 
     }
     double scale = 0.60f;

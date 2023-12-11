@@ -52,6 +52,10 @@ const wxPoint2DDouble PostPosition = wxPoint2DDouble(22, 0);
 /// the goalpost PhysicsPolygon object.
 const wxPoint2DDouble GoalPosition = wxPoint2DDouble(-12, 165);
 
+/**
+ * constructor
+ * @param imagesDir
+ */
 Goal::Goal(const std::wstring imagesDir)
 {
 
@@ -64,7 +68,10 @@ Goal::Goal(const std::wstring imagesDir)
     mGoal.BottomCenteredRectangle(TargetSize);
     mGoal.SetColor(*wxBLUE);
 }
-
+/**
+ * override function BeginContact from b2ContactListener
+ * @param contact
+ */
 void Goal::BeginContact(b2Contact *contact)
 {
     mScore += 2;
@@ -81,7 +88,10 @@ void Goal::PreSolve(b2Contact *contact, const b2Manifold *oldManifold)
 {
     contact->SetEnabled(false);
 }
-
+/**
+ * Draws Graphics for goal
+ * @param graphics
+ */
 void Goal::Draw(std::shared_ptr<wxGraphicsContext> graphics)
 {
     graphics->PushState();
@@ -113,6 +123,11 @@ void Goal::Draw(std::shared_ptr<wxGraphicsContext> graphics)
 //    mGoal.Draw(graphics);
 }
 
+/**
+ * sets position for goal
+ * @param x
+ * @param y
+ */
 void Goal::SetPosition(double x, double y)
 {
     mPost.SetInitialPosition(x + PostPosition.m_x , y + PostPosition.m_y );
@@ -120,15 +135,25 @@ void Goal::SetPosition(double x, double y)
     mPosition.x = x;
     mPosition.y = y;
 }
-
+/**
+ * updates machine
+ * @param elapsed
+ */
 void Goal::Update(double elapsed)
 {
 
 }
+/**
+ * resets machine
+ */
 void Goal::Reset()
 {
 
 }
+/**
+ * install physics for objects
+ * @param world
+ */
 void Goal::InstallPhysics(std::shared_ptr<b2World> world)
 {
     auto contactListener = GetContactListener();

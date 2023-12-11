@@ -7,13 +7,20 @@
 
 #ifndef CANADIANEXPERIENCE_MACHINELIB_IROTATIONSINK_H
 #define CANADIANEXPERIENCE_MACHINELIB_IROTATIONSINK_H
-//class IRotationSource;
 class Component;
+/**
+ * Interface for rotation sinks
+ */
 class IRotationSink {
 public:
 
     /// Destructor
     virtual ~IRotationSink() = default;
+    /**
+     * Rotation function for sinks
+     * @param rotation
+     * @param speed
+     */
     virtual void Rotate(double rotation, double speed) = 0;
 };
 

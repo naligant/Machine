@@ -3,6 +3,7 @@
  * @author Prajeeth Naliganti
  */
 
+#include "pch.h"
 #include "RotationSource.h"
 #include "IRotationSink.h"
 

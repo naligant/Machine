@@ -12,7 +12,9 @@
 #include "Component.h"
 #include "IRotationSink.h"
 #include "RotationSource.h"
-
+/**
+ * rotation source and sink to Hamster and other objects
+ */
 class Pulley : public Component, public IRotationSink
 {
 private:

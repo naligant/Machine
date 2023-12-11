@@ -60,8 +60,8 @@ std::shared_ptr<Picture> PictureFactory::Create(std::wstring resourcesDir)
     machineOne->SetMachineNumber(1);
     machineOne->SetPosition(wxPoint(500, 1050));
     machineOne->SetTimeline(background->GetPicture()->GetTimeline());
-    machineOne->StartFrame(3 * frameRate);
-    machineOne->EndFrame(7 * frameRate);
+    machineOne->StartFrame(1 * frameRate);
+    machineOne->EndFrame(10 * frameRate);
     background->SetMachineNum(machineOne);
     background->AddDrawable(machineOne);
 
@@ -70,8 +70,8 @@ std::shared_ptr<Picture> PictureFactory::Create(std::wstring resourcesDir)
     machineTwo->SetMachineNumber(2);
     machineTwo->SetPosition(wxPoint(1500, 1050));
     machineTwo->SetTimeline(background->GetPicture()->GetTimeline());
-    machineTwo->StartFrame(1 * frameRate);
-    machineTwo->EndFrame(5 * frameRate);
+    machineTwo->StartFrame(5 * frameRate);
+    machineTwo->EndFrame( 18* frameRate);
     background->SetMachineNum(machineTwo);
     background->AddDrawable(machineTwo);
 

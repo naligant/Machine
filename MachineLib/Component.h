@@ -10,11 +10,13 @@
 #include <b2_world.h>
 #include "PhysicsPolygon.h"
 #include "Machine.h"
+/**
+ * Abstract class for components in machine
+ */
 class Component
 {
 private:
-    cse335::PhysicsPolygon* mPolygon;
-    bool mPhysics;
+    ///pointer to machine
     Machine* mMachine = nullptr;
 public:
     /**
@@ -22,18 +24,7 @@ public:
      * @param elapsed
      */
     virtual void Update(double elapsed);
-    /**
-     * Draws the components
-     * @param graphics
-     * @param x
-     * @param y
-     */
     virtual void Draw(std::shared_ptr<wxGraphicsContext> graphics);
-    /**
-     * Sets the angle at which it rotates
-     * @param rotation
-     */
-    virtual void SetRotation(double rotation);
     /**
      * resets entire machine
      */
@@ -43,13 +34,12 @@ public:
      * @param speed
      */
     virtual void SetSpeed(double speed);
-
     void SetMachine(Machine *machine);
-
     virtual void InstallPhysics(std::shared_ptr<b2World> world);
-
-//    wxPoint GetMachinePosition() {return mMachine->GetLocation();}
-
+    /**
+     * Gets contact listener from machine
+     * @return contactlistener
+     */
     std::shared_ptr<ContactListener> GetContactListener() {return mMachine->GetContactListener();};
 
 

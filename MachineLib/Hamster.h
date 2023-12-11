@@ -12,7 +12,9 @@
 #include "Polygon.h"
 #include "RotationSource.h"
 #include <b2_world_callbacks.h>
-
+/**
+ * hamster is a rotation source for many other components
+ */
 class Hamster : public Component, public b2ContactListener
 {
 private:

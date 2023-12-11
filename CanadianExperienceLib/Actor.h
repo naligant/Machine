@@ -127,6 +127,10 @@ public:
      */
     AnimChannelPoint *GetPositionChannel() { return &mChannel; }
 
+    /**
+     * Sets the adapter to Picture
+     * @param adapter
+     */
     void SetMachineNum(std::shared_ptr<MachineAdapter> adapter) {mPicture->SetMachineNum(adapter);}
 };
 

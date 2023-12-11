@@ -12,9 +12,13 @@
 #include "Polygon.h"
 #include "RotationSource.h"
 #include "IRotationSink.h"
+/**
+ * class for body parts
+ */
 class Body : public Component, public IRotationSink
 {
 private:
+    /// physics polygon object
     cse335::PhysicsPolygon mPolygon;
 
 

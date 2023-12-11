@@ -3,6 +3,7 @@
  * @author Prajeeth Naliganti
  */
 
+#include "pch.h"
 #include "Conveyor.h"
 #include <b2_contact.h>
 
@@ -21,37 +22,62 @@ Conveyor::Conveyor(const std::wstring imagesDir)
     mConveyor.BottomCenteredRectangle(ConveyorSize);
     mConveyor.SetImage(imagesDir + ConveyorImageName);
 }
-
+/**
+ * override function PreSolve from b2ContactListener
+ * @param contact
+ * @param oldManifold
+ */
 void Conveyor::PreSolve(b2Contact *contact, const b2Manifold *oldManifold)
 {
 
     contact->SetTangentSpeed(mSpeed);
 }
+/**
+ * Draws the graphics for conveyor
+ * @param graphics
+ */
 void Conveyor::Draw(std::shared_ptr<wxGraphicsContext> graphics)
 {
     mConveyor.Draw(graphics);
 }
+/**
+ * resets machine
+ */
 void Conveyor::Reset()
 {
 
 }
-
+/**
+ * updates machine
+ * @param elapsed
+ */
 void Conveyor::Update(double elapsed)
 {
 }
+/**
+ * sets position of conveyor
+ * @param point
+ */
 void Conveyor::SetPosition(wxPoint2DDouble point)
 {
     mConveyor.SetInitialPosition(point.m_x, point.m_y);
     mPosition.m_x = point.m_x;
     mPosition.m_y = point.m_y;
 }
-
+/**
+ * Gets conveyor's shaft position
+ * @return
+ */
 wxPoint Conveyor::GetShaftPosition()
 {
     auto point = wxPoint(mPosition.m_x + ConveyorShaftOffset.m_x, mPosition.m_y + ConveyorShaftOffset.m_y);
     return point;
 }
-
+/**
+ * Override function for rotate from component
+ * @param rotation
+ * @param speed
+ */
 void Conveyor::Rotate(double rotation, double speed)
 {
     mSpeed = speed;
@@ -66,7 +92,10 @@ void Conveyor::Rotate(double rotation, double speed)
         contact = contact->next;
     }
 }
-
+/**
+ * Installs physics for object
+ * @param world
+ */
 void Conveyor::InstallPhysics(std::shared_ptr<b2World> world)
 {
     mConveyor.InstallPhysics(world);

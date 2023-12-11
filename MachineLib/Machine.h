@@ -10,7 +10,9 @@
 #include <b2_world.h>
 #include "ContactListener.h"
 class Component;
-
+/**
+ * Machine that puts all components together and displays
+ */
 class Machine
 {
 private:

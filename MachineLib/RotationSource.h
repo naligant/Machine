@@ -7,10 +7,13 @@
 
 #ifndef CANADIANEXPERIENCE_MACHINELIB_ROTATIONSOURCE_H
 #define CANADIANEXPERIENCE_MACHINELIB_ROTATIONSOURCE_H
-//#include "Component.h"
+
 class IRotationSource;
 class IRotationSink;
 class Component;
+/**
+ * Makes an object a rotation source
+ */
 class RotationSource
 {
 private:

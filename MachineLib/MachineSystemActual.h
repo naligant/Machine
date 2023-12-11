@@ -9,7 +9,9 @@
 #define CANADIANEXPERIENCE_MACHINELIB_MACHINESYSTEMACTUAL_H
 #include "IMachineSystem.h"
 #include "Machine.h"
-
+/**
+ * Machine System that derives information from interface
+ */
 class MachineSystemActual : public IMachineSystem
 {
 private:
