@@ -45,19 +45,20 @@ public:
      * @param imagesDir
      */
     Hamster(const std::wstring imagesDir);
-
     /// Copy constructor (disabled)
     Hamster(const Hamster &) = delete;
-
-//    /// Assignment operator
-//    void operator=(const Hamster &) = delete;
-
+    /// Assignment operator
+    void operator=(const Hamster &) = delete;
     void BeginContact(b2Contact* contact) override;
     void Draw(std::shared_ptr<wxGraphicsContext> graphics) override;
     void Update(double elapsed) override;
     void Reset() override;
     void SetInitiallyRunning(bool running);
     void SetPosition(double x, double y);
+    /**
+     * sets hamsters speed
+     * @param speed
+     */
     void SetSpeed(double speed) override {mSpeed = speed;};
     void InstallPhysics(std::shared_ptr<b2World> world) override;
     void Rotate(double rotation, double speed);

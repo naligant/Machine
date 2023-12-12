@@ -32,6 +32,7 @@ private:
     /// The animation timeline
     Timeline mTimeline;
 
+    ///pointer to adapter
     std::shared_ptr<MachineAdapter> mAdapter;
 
 public:
@@ -69,7 +70,15 @@ public:
     void RemoveObserver(PictureObserver *observer);
     void UpdateObservers();
     void Draw(std::shared_ptr<wxGraphicsContext> graphics);
+    /**
+     * gets the adpater variable
+     * @return
+     */
     std::shared_ptr<MachineAdapter> GetMachineNum() {return mAdapter;}
+    /**
+     * sets the adapter variable
+     * @param adapter
+     */
     void SetMachineNum(std::shared_ptr<MachineAdapter> adapter) {mAdapter = adapter;}
     void AddActor(std::shared_ptr<Actor> actor);
 

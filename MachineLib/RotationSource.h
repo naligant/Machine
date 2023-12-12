@@ -8,7 +8,6 @@
 #ifndef CANADIANEXPERIENCE_MACHINELIB_ROTATIONSOURCE_H
 #define CANADIANEXPERIENCE_MACHINELIB_ROTATIONSOURCE_H
 
-class IRotationSource;
 class IRotationSink;
 class Component;
 /**
@@ -17,7 +16,7 @@ class Component;
 class RotationSource
 {
 private:
-    Component* mComponent = nullptr;
+    ///Sink objects that need to be added to source
     std::vector<std::shared_ptr<IRotationSink>> mSink;
 
 public:

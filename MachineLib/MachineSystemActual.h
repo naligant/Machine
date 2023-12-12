@@ -15,9 +15,13 @@
 class MachineSystemActual : public IMachineSystem
 {
 private:
+    ///shared pointer to machine
     std::shared_ptr<Machine> mMachine;
+    ///resources directory
     std::wstring mResourcesDir;
+    ///frame
     int mFrame = 0;
+    ///framerate
     int mFrameRate = 30;
 
 
@@ -80,12 +84,10 @@ public:
     virtual void SetMachineNumber(int machine);
 
     /**
-     * Sets the machine number
-     * @param machine
+     * Gets the machine number
+     * @return machine number
      */
      virtual int GetMachineNumber();
-
-    void SetMachine(std::shared_ptr<Machine> machine) {mMachine = machine;}
 
 
 

@@ -20,7 +20,9 @@ private:
     std::shared_ptr<b2World> mWorld;
     /// The installed contact filter
     std::shared_ptr<ContactListener> mContactListener;
+    ///machine number
     int mMachine;
+    ///location of machine
     wxPoint mLocation = wxPoint(0,0);
     int mFrame = 0;     ///< Current frame
     /// How many pixels there are for each CM
@@ -30,7 +32,6 @@ private:
     std::vector<std::shared_ptr<Component>> mComponents;
 
 public:
-    Machine();
     Machine(int machine);
     /**
      * Adds component to machine
@@ -74,9 +75,10 @@ public:
     * @return Machine number
     */
     int GetMachine() { return mMachine; }
-
-    std::shared_ptr<b2World> GetWorld() {return mWorld;}
-
+    /**
+     * Gets the contact listener
+     * @return
+     */
     std::shared_ptr<ContactListener> GetContactListener() {return mContactListener;}
 
     /** Iterator that iterates over the actors in a picture */
@@ -84,9 +86,9 @@ public:
     {
     public:
         /**
-         * Constructor
-         * @param picture Picture we are iterating
-         * @param pos Starting position \
+         * constructor
+         * @param machine
+         * @param pos
          */
         ComponentIter(Machine *machine, int pos) : mMachine(machine), mPos(pos) {}
 

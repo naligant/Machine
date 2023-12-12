@@ -43,6 +43,10 @@ const std::wstring HamsterImages[4] =
     {L"/hamster-sleep.png", L"/hamster-run-1.png",
         L"/hamster-run-2.png", L"/hamster-run-3.png"};
 
+/**
+ * constructor
+ * @param imagesDir
+ */
 Hamster::Hamster(const std::wstring imagesDir) : mSource(this)
 {
     mCage.BottomCenteredRectangle(HamsterCageSize);
@@ -62,10 +66,18 @@ Hamster::Hamster(const std::wstring imagesDir) : mSource(this)
 
     mCurrentHamster = &mHamsters[0];
 }
+/**
+ * override function BeginContact from b2ContactListener
+ * @param contact
+ */
 void Hamster::BeginContact(b2Contact* contact)
 {
     mIsRunning = true;
 }
+/**
+ * draws hamster in machine
+ * @param graphics
+ */
 void Hamster::Draw(std::shared_ptr<wxGraphicsContext> graphics)
 {
     mCage.Draw(graphics);
@@ -86,12 +98,12 @@ void Hamster::Draw(std::shared_ptr<wxGraphicsContext> graphics)
 
 
 }
+/**
+ * updates machine
+ * @param elapsed
+ */
 void Hamster::Update(double elapsed)
 {
-//    if (mIsRunning)
-//    {
-//        mIsInitialRunning = true;
-//    }
     if (mIsRunning || mIsInitialRunning)
     {
         mRotation += -mSpeed * elapsed;
@@ -99,45 +111,58 @@ void Hamster::Update(double elapsed)
         int index = int(abs(mRotation) * HamsterSpeed * HamsterSpeed) % 4;
         int order[] = {1, 2, 3, 2};
         mCurrentHamster = &mHamsters[order[index]];
-//        if (mRotation)
-//        {
-//            mCurrentHamster = &mHamsters[1];
-//        }
-//        else
-//        {
-//            mCurrentHamster = &mHamsters[0];
-//        }
     }
-
 }
+/**
+ * resets machine
+ */
 void Hamster::Reset()
 {
 
 }
+/**
+ * sets hamster to be running from the beginning
+ * @param running
+ */
 void Hamster::SetInitiallyRunning(bool running)
 {
     mIsInitialRunning = true;
 }
+/**
+ * sets position of hamster
+ * @param x
+ * @param y
+ */
 void Hamster::SetPosition(double x, double y)
 {
     mPosition.m_x = x;
     mPosition.m_y = y;
     mCage.SetInitialPosition(x, y);
 }
-
+/**
+ * installs physics for object
+ * @param world
+ */
 void Hamster::InstallPhysics(std::shared_ptr<b2World> world)
 {
     auto contactListener = GetContactListener();
     mCage.InstallPhysics(world);
     contactListener->Add(mCage.GetBody(), this);
 }
-
+/**
+ * rotates the objects
+ * @param rotate
+ * @param speed
+ */
 void Hamster::Rotate(double rotate, double speed)
 {
     mCage.SetAngularVelocity(speed);
     mSource.Rotate(rotate, speed);
 }
-
+/**
+ * gets shaft poisiton of hamster cage
+ * @return
+ */
 wxPoint Hamster::GetShaftPosition()
 {
     auto point = wxPoint(mPosition.m_x + HamsterShaftOffset.m_x, mPosition.m_y + HamsterShaftOffset.m_y);

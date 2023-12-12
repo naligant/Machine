@@ -19,13 +19,7 @@ const int PositionIterations = 2;
 
 /**
  * Constructor
- */
-Machine::Machine()
-{
-
-}
-/**
- * Constructor
+ * @param machine
  */
 Machine::Machine(int machine)
 {

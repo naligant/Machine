@@ -15,10 +15,15 @@
 class MachineAdapter : public Drawable
 {
 private:
+    ///pointer to machine system
     std::shared_ptr<IMachineSystem> mMachineSystem;
+    ///location of machine
     wxPoint mLocation = wxPoint(0,0);
+    ///pointer to timeline
     Timeline* mTimeline;
+    ///start frame
     int mStartFrame = 0;
+    ///end frame
     int mEndFrame = 0;
 
 public:
@@ -26,18 +31,30 @@ public:
     void Draw(std::shared_ptr<wxGraphicsContext> graphics) override;
     bool HitTest(wxPoint pos) override;
     void SetPosition(wxPoint pos);
+    /**
+     * Loads xml
+     * @param filename
+     */
     void Load(const wxString& filename);
+    /**
+     * save xml
+     * @param filename
+     */
     void Save(const wxString& filename);
     void ShowDialogBox(wxWindow* mainFrame);
     void SetMachineNumber(int machine);
     void SetTimeline(Timeline* timeline) override;
     void SetMachineFrame(int frame);
+    /**
+     * Set start frame
+     * @param frame
+     */
     void StartFrame(int frame) {mStartFrame = frame;}
+    /**
+     * Set end frame
+     * @param frame
+     */
     void EndFrame(int frame) {mEndFrame = frame;}
-//    void SetKeyframe() override;
-//    void GetKeyframe() override;
-//    double GetMachineTime();
-
 };
 
 #endif //CANADIANEXPERIENCE_CANADIANEXPERIENCELIB_MACHINEADAPTER_H

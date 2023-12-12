@@ -27,7 +27,6 @@ MachineCFactory::MachineCFactory(std::wstring resourcesDir)
 
 /**
  * Create a machine
- * @param machine IMachineSystem number to create
  * @return Pointer to newly created machine
  */
 std::shared_ptr<Machine> MachineCFactory::Create()
@@ -161,27 +160,6 @@ std::shared_ptr<Machine> MachineCFactory::Create()
     ball2->SetPhysics(1, 0.5, 0.6);
     machine->AddComponent(ball2);
 
-//    auto hamster1 = std::make_shared<Hamster>(mImagesDir);
-//    hamster1->SetSpeed(1.0);
-//    hamster1->SetInitiallyRunning(true);
-//    machine->AddComponent(hamster1);
-//    hamster1->SetPosition(0, 150);
-//
-//    // The pulley driven by the hamster
-//    auto pulley1 = std::make_shared<Pulley>(10);
-//    pulley1->SetImage(mImagesDir + L"/pulley3.png");
-//    pulley1->SetPosition(hamster1->GetShaftPosition().x, hamster1->GetShaftPosition().y);
-//    machine->AddComponent(pulley1);
-//
-//    hamster1->GetSource()->AddSink(pulley1);
-//
-//    auto pulley2 = std::make_shared<Pulley>(10);
-//    pulley2->SetImage(mImagesDir + L"/pulley3.png");
-//    pulley2->SetPosition(150, 250);
-//    machine->AddComponent(pulley2);
-//
-//    pulley1->Drive(pulley2);
-
     return machine;
 }
 
@@ -230,7 +208,11 @@ std::shared_ptr<Body>  MachineCFactory::Domino(std::shared_ptr<Machine> machine,
 
     return domino;
 }
-
+/**
+ * Function to make a domino stack
+ * @param machine
+ * @param position
+ */
 void MachineCFactory::DominoStack(std::shared_ptr<Machine> machine, wxPoint2DDouble position)
 {
     Domino(machine, position + wxPoint2DDouble(30, DominoHeight/2), 0, DominoColor::Red);

@@ -217,15 +217,6 @@ void ViewEdit::OnUpdateEditRotate(wxUpdateUIEvent& event)
     event.Check(mMode == Mode::Rotate);
 }
 
-//void ViewEdit::OnEditMachine(wxCommandEvent& event)
-//{
-//    MachineDialog dlg(this->GetParent(), machine);
-//    if (dlg.ShowModal() == wxID_OK)
-//    {
-//        // A machine has been selected
-//    }
-//}
-
 /**
  * Handle an Edit>Machine Number menu option
  * @param event The menu event

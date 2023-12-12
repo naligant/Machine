@@ -4,15 +4,20 @@
  */
 #include "pch.h"
 #include "Pulley.h"
-
+/**
+ * constructor
+ * @param radius
+ */
 Pulley::Pulley(double radius) : mSource(this)
 {
 
     mRadius = radius;
     mWheel.CenteredSquare(mRadius * 2);
 }
-
-
+/**
+ * Function that draws pulley
+ * @param graphics
+ */
 void Pulley::Draw(std::shared_ptr<wxGraphicsContext> graphics)
 {
     if (mPulley)
@@ -42,7 +47,10 @@ void Pulley::Draw(std::shared_ptr<wxGraphicsContext> graphics)
     }
     mWheel.DrawPolygon(graphics, mX, mY, mRotation);
 }
-
+/**
+ * Updates machine
+ * @param elapsed
+ */
 void Pulley::Update(double elapsed)
 {
     if (mPulley)
@@ -51,27 +59,45 @@ void Pulley::Update(double elapsed)
         mPulley->mSource.Rotate(mRotation, mSpeed);
     }
 }
-
+/**
+ * resets machine
+ */
 void Pulley::Reset()
 {
 
 }
-
+/**
+ * Override for SetImage function in PhysicsPolygon
+ * @param filename
+ */
 void Pulley::SetImage(const std::wstring &filename)
 {
    mWheel.SetImage(filename);
 }
-
+/**
+ * sets position of pulley
+ * @param x
+ * @param y
+ */
 void Pulley::SetPosition(double x, double y)
 {
    mX = x;
    mY = y;
 }
+/**
+ * rotation information for pulley
+ * @param rotation
+ * @param speed
+ */
 void Pulley::Rotate(double rotation, double speed)
 {
     mRotation = rotation;
     mSpeed = speed;
 }
+/**
+ * get second pulley to connect to
+ * @param pulley
+ */
 void Pulley::Drive(std::shared_ptr<Pulley> pulley)
 {
     mPulley = pulley;

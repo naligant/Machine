@@ -17,10 +17,15 @@
 class Goal : public Component, public b2ContactListener
 {
 private:
+    ///position of hoal
     wxPoint mPosition;
+    ///polygon
     cse335::Polygon mPolygon;
+    ///physics polygon for post
     cse335::PhysicsPolygon mPost;
+    ///physics polygon for goal
     cse335::PhysicsPolygon mGoal;
+    ///score for goal
     int mScore;
 
 public:
