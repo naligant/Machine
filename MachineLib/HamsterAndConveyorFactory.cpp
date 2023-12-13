@@ -21,7 +21,6 @@ void HamsterAndConveyorFactory::Create(wxPoint2DDouble hamsterPosition, wxPoint2
     auto hamster = std::make_shared<Hamster>(mImagesDir);
     mHamster = hamster;
     hamster->SetPosition(hamsterPosition.m_x, hamsterPosition.m_y);
-//    hamster->SetInitiallyRunning(true);
     mMachine->AddComponent(hamster);
     auto hamsterShaft = hamster->GetShaftPosition();
 

@@ -10,6 +10,7 @@
 #include "Hamster.h"
 #include "Goal.h"
 #include "Pulley.h"
+#include "Conveyor.h"
 #include "HamsterAndConveyorFactory.h"
 
 /// The images directory in resources
@@ -135,7 +136,6 @@ std::shared_ptr<Machine> MachineCFactory::Create()
     HamsterAndConveyorFactory hamsterAndConveyorFactory(machine, mImagesDir);
 
     hamsterAndConveyorFactory.Create(wxPoint2DDouble(-280, 20), wxPoint2DDouble(-220, 80));
-    //hamsterAndConveyorFactory.AddBall(40);
     auto hamster1 = hamsterAndConveyorFactory.GetHamster();
     auto conveyor1 = hamsterAndConveyorFactory.GetConveyor();
     hamster1->SetInitiallyRunning(true);
@@ -145,11 +145,39 @@ std::shared_ptr<Machine> MachineCFactory::Create()
     DominoStack(machine, beamposition);
 
     //Hamster and conveyor 2
-    hamsterAndConveyorFactory.Create(wxPoint2DDouble(35, 0), wxPoint2DDouble(160, 330));
-    //hamsterAndConveyorFactory.AddBall(40);
-    auto hamster2 = hamsterAndConveyorFactory.GetHamster();
-    auto conveyor2 = hamsterAndConveyorFactory.GetConveyor();
-    hamster1->SetSpeed(0.5);
+    auto hamsterPosition = wxPoint2DDouble(35, 0);
+    auto conveyorPosition = wxPoint2DDouble(160, 330);
+    auto hamster2 = std::make_shared<Hamster>(mImagesDir);
+    hamster2->SetPosition(hamsterPosition.m_x, hamsterPosition.m_y);
+    machine->AddComponent(hamster2);
+    auto hamsterShaft2 = hamster2->GetShaftPosition();
+
+    auto conveyor2 = std::make_shared<Conveyor>(mImagesDir);
+    conveyor2->SetPosition(conveyorPosition);
+    machine->AddComponent(conveyor2);
+    auto conveyorShaft = conveyor2->GetShaftPosition();
+
+    // The pulley driven by the hamster
+    auto pulley1 = std::make_shared<Pulley>(10);
+    pulley1->SetImage(mImagesDir + L"/pulley3.png");
+    pulley1->SetPosition(hamsterShaft2.x, hamsterShaft2.y);
+    machine->AddComponent(pulley1);
+
+    hamster2->GetSource()->AddSink(pulley1);
+
+    auto pulley2 = std::make_shared<Pulley>(30);
+    pulley2->SetImage(mImagesDir + L"/pulley3.png");
+    pulley2->SetPosition(conveyorShaft.x, conveyorShaft.y);
+    machine->AddComponent(pulley2);
+
+    pulley1->Drive(pulley2);
+
+    pulley2->GetSource()->AddSink(conveyor2);
+
+//    hamsterAndConveyorFactory.Create(wxPoint2DDouble(35, 0), wxPoint2DDouble(160, 330));
+//    auto hamster2 = hamsterAndConveyorFactory.GetHamster();
+//    auto conveyor2 = hamsterAndConveyorFactory.GetConveyor();
+//    hamster1->SetSpeed(0.5);
 
     //Third ball for goal
     auto ball2= std::make_shared<Body>();

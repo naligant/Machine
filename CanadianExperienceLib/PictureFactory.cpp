@@ -71,7 +71,7 @@ std::shared_ptr<Picture> PictureFactory::Create(std::wstring resourcesDir)
     machineTwo->SetPosition(wxPoint(1500, 1050));
     machineTwo->SetTimeline(background->GetPicture()->GetTimeline());
     machineTwo->StartFrame(5 * frameRate);
-    machineTwo->EndFrame( 18* frameRate);
+    machineTwo->EndFrame( 20* frameRate);
     background->SetMachineNum(machineTwo);
     background->AddDrawable(machineTwo);
 
